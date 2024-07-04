@@ -1,3 +1,4 @@
+using System;
 using Script.Database;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Script.Game
     {  
         public static GameInstance Singleton { get; private set; }
         
+        public GameDatabase gameDatabase; 
         public static GameDatabase GameDatabase { get; private set; }
         
         private void Awake()
@@ -18,6 +20,9 @@ namespace Script.Game
             }
             Singleton = this;
             DontDestroyOnLoad(gameObject); 
+            
+            GameDatabase = gameDatabase;
         }
+
     }
 }
