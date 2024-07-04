@@ -1,0 +1,23 @@
+using Script.Database;
+using UnityEngine;
+
+namespace Script.Game
+{
+    public class GameInstance : MonoBehaviour
+    {  
+        public static GameInstance Singleton { get; private set; }
+        
+        public static GameDatabase GameDatabase { get; private set; }
+        
+        private void Awake()
+        {
+            if (Singleton != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Singleton = this;
+            DontDestroyOnLoad(gameObject); 
+        }
+    }
+}
