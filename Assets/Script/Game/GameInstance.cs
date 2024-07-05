@@ -1,5 +1,5 @@
-using System;
 using Script.Database;
+using Script.Service;
 using UnityEngine;
 
 namespace Script.Game
@@ -10,6 +10,9 @@ namespace Script.Game
         
         public GameDatabase gameDatabase; 
         public static GameDatabase GameDatabase { get; private set; }
+        
+        public GameService gameService;
+        public static GameService GameService { get; private set; }
         
         private void Awake()
         {
@@ -22,6 +25,7 @@ namespace Script.Game
             DontDestroyOnLoad(gameObject); 
             
             GameDatabase = gameDatabase;
+            GameService = gameService;
         }
 
     }

@@ -13,8 +13,9 @@ namespace Script
         
         public void RefreshUi(T bInfo)
         { 
-            info = bInfo;
-            
+            info = bInfo; 
+            if(iconSelected!=null)
+                iconSelected.gameObject.SetActive(false);
             InitUi();
         } 
         

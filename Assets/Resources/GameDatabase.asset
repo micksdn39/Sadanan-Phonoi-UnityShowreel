@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096467177625a0a4da4da863004d48a9, type: 3}
   m_Name: GameDatabase
   m_EditorClassIdentifier: 
+  listOfProfileData:
+  - {fileID: 11400000, guid: 0425e029227e1fb4789be2baee1153b3, type: 2}
+  - {fileID: 11400000, guid: c676756177a51444b995267a1fa957f5, type: 2}
+  - {fileID: 11400000, guid: 4897c08438b6cdf4a9606cc391aade45, type: 2}
+  - {fileID: 11400000, guid: 8c041f60c722b7b469c2c0568c3024ec, type: 2}
+  - {fileID: 11400000, guid: a30a3819d186c3442bb74c8be3dd9f5b, type: 2}
+  - {fileID: 11400000, guid: 71f2f2fbf1a24b84bafdc4b51f2fff1d, type: 2}

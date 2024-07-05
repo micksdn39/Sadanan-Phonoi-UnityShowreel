@@ -1,5 +1,4 @@
-using Script.Save;
-using TMPro;
+using Script.Save; 
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,12 +6,14 @@ namespace Script.Game
 {
     public class GameLogin : MonoBehaviour
     { 
-        [SerializeField] private string loadSceneName;
-        [Space] 
-        [SerializeField] private GameObject panelRegister; 
-        [SerializeField] private TMP_InputField inputFieldName;
+        [SerializeField] private string loadSceneName; 
+        [SerializeField] private GameObject tabToStartGameObject;  
+        [SerializeField] private GameRegister gameRegister;
+        
+        private bool isOpenRegister = false; 
         private void Update()
         {
+            if (isOpenRegister) return;
             OnCheckGetInputMouse(); 
         }
         private void OnCheckGetInputMouse()
@@ -22,23 +23,23 @@ namespace Script.Game
                 string currentPlayerId = ClientSave.Load(SaveKey.PlayerInfo);
                 if (string.IsNullOrEmpty(currentPlayerId))
                 { 
-                    panelRegister.SetActive(true);
+                    gameRegister.Open();
+                    gameRegister.OnRegisterSuccess+=LoadNewScene;
+                    isOpenRegister = true;
+                    tabToStartGameObject.SetActive(false);
                     return;
                 } 
-                LoadNewScene();
-
+                LoadNewScene(); 
             }
-        }
-         
+        } 
         private void LoadNewScene()
         {
             SceneManager.LoadScene(loadSceneName); 
-        }
-
-        public void OnButtonClick_GuestLogin()
+        }  
+        public void OnButtonClick_Exit()
         {
-            
+            isOpenRegister = false;
+            tabToStartGameObject.SetActive(true);
         }
-
     }
 }
