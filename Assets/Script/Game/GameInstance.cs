@@ -1,4 +1,5 @@
 using Script.Database;
+using Script.Language;
 using Script.Service;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ namespace Script.Game
         public GameService gameService;
         public static GameService GameService { get; private set; }
         
+        public LanguageManager languageManager;
+        public static LanguageManager LanguageManager { get; private set; }
+
         private void Awake()
         {
             if (Singleton != null)
@@ -26,6 +30,7 @@ namespace Script.Game
             
             GameDatabase = gameDatabase;
             GameService = gameService;
+            LanguageManager = languageManager;
         }
 
     }

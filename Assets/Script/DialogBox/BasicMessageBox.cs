@@ -25,11 +25,10 @@ namespace Script.DialogBox
         [SerializeField] private Transform rootButtons;
         [SerializeField] private DialogButton prefebBtnYes;
         [SerializeField] private DialogButton prefebBtnNo;
-
-        private static BaseDialogBox box;
+ 
         public static BasicMessageBox Show(BasicMessageBoxInfo messageInfo, Action<DialogResult> callback)
         {
-            box = Create("Dialog/(prefeb) BasicMessageBox");
+            BaseDialogBox box = Create("Dialog/(prefeb) BasicMessageBox");
             ((BasicMessageBox)box)._Show(messageInfo.message , callback,messageInfo.list);
             return (box as BasicMessageBox);
         }

@@ -10,6 +10,7 @@ namespace Script.Database
         [Header("ProfileDatabase")]
         public List<ProfileDataSO> listOfProfileData;
 
+        
 
     }
 }

@@ -1,8 +1,10 @@
 using System;
 using Script.DialogBox;
+using Script.Language;
 using Script.Player;
 using Script.Save;
 using Script.Ui.Profile;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
@@ -19,8 +21,7 @@ namespace Script.Game
         
         public event Action OnRegisterSuccess;
         
-        [InspectorButton("ResetPlayer")]
-        public bool ResetKey; 
+        [Button]
         public void ResetPlayer()
         {
             ClientSave.DeleteAll();
@@ -50,18 +51,20 @@ namespace Script.Game
             });
             profileImageCtrl.Active(false);
             
+            string registerSuccess = GameInstance.LanguageManager.GetText(GameText.TITLE_REGISTER_SUCCESS);
+            string buttonOk = GameInstance.LanguageManager.GetText(GameText.TITLE_BUTTON_OK);
             BasicMessageBox.Show(
-                new BasicMessageBoxInfo("Register Success", 
-                    new ButtonEntryInfo("OK", DialogResult.OK))
-                ,
-                result =>
+                new BasicMessageBoxInfo(registerSuccess, 
+                new ButtonEntryInfo(buttonOk, DialogResult.OK)), 
+                Callback);
+            
+            void Callback(DialogResult result)
+            {
+                if (result == DialogResult.OK)
                 {
-                    if (result == DialogResult.OK)
-                    {
-                        OnRegisterSuccess?.Invoke();
-                        BasicMessageBox.Close();
-                    }
-                });
+                    OnRegisterSuccess?.Invoke();
+                }
+            }
         }
     }
 }
