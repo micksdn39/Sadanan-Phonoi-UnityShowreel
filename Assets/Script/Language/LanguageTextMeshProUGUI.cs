@@ -1,3 +1,4 @@
+using System;
 using Script.Game;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -17,8 +18,22 @@ namespace Script.Language
         {
             text = GetComponent<TextMeshProUGUI>();
             text.font = GameInstance.LanguageManager.GetFont;
+            
             if(isGetFontOnly) return;
-            text.text = GameInstance.LanguageManager.GetText(key); 
+            
+            text.text = GameInstance.LanguageManager.GetText(key);
+            GameInstance.LanguageManager.OnLanguageChanged += SubscribeOnLanguageChanged;
+        }
+
+        private void OnDestroy()
+        {
+            GameInstance.LanguageManager.OnLanguageChanged -= SubscribeOnLanguageChanged;
+        }
+
+        private void SubscribeOnLanguageChanged()
+        {
+            text.font = GameInstance.LanguageManager.GetFont;
+            text.text = GameInstance.LanguageManager.GetText(key);
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Script.Language
         public string CurrentLanguageKey { get; private set; } 
  
         private string defaultLanguageKey = "ENG";
-        private string playerPrefsKey = "USER_LANG";   
+        private string playerPrefsKey = "USER_LANG";
+        public event Action OnLanguageChanged;
         private void Awake()
         { 
             CurrentLanguageKey = ClientSave.Load(playerPrefsKey, defaultLanguageKey);
@@ -32,6 +33,7 @@ namespace Script.Language
              
             CurrentLanguageKey = languageKey;
             texts = DefaultLocale.Languages[CurrentLanguageKey];
+            OnLanguageChanged?.Invoke();
             ClientSave.Save(playerPrefsKey, CurrentLanguageKey);
         }
 
