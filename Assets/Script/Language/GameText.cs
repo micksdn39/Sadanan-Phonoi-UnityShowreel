@@ -24,8 +24,10 @@ namespace Script.Language
         public const string TITLE_SELECTED_TEXT = TEXT_PREFIX + "TITLE_SELECTED_TEXT";
         public const string TITLE_NOTICE = TEXT_PREFIX + "TITLE_NOTICE";
         public const string TITLE_ADVENTURE = TEXT_PREFIX + "TITLE_ADVENTURE";
+        public const string TITLE_NAME_CONFIRM = TEXT_PREFIX + "TITLE_NAME_CONFIRM";
         
         public const string TITLE_BUTTON_OK = TEXT_PREFIX + "TITLE_BUTTON_OK";
+        public const string TITLE_BUTTON_YES = TEXT_PREFIX + "TITLE_BUTTON_YES";
         public const string TITLE_BUTTON_CANCEL = TEXT_PREFIX + "TITLE_BUTTON_CANCEL";
     }
     
@@ -55,8 +57,10 @@ namespace Script.Language
             engTexts.Add(GameText.TITLE_NOTICE, "Notice");
             engTexts.Add(GameText.TITLE_REGISTER_SUCCESS, "Register Success");
             engTexts.Add(GameText.TITLE_BUTTON_OK, "OK");
+            engTexts.Add(GameText.TITLE_BUTTON_YES, "Yes");
             engTexts.Add(GameText.TITLE_BUTTON_CANCEL, "Cancel");
             engTexts.Add(GameText.TITLE_ADVENTURE, "Adventure");
+            engTexts.Add(GameText.TITLE_NAME_CONFIRM, "Confirm Name : ");
             Languages.Add("ENG", engTexts);
 
             Dictionary<string, string> thTexts = new Dictionary<string, string>();
@@ -79,8 +83,10 @@ namespace Script.Language
             thTexts.Add(GameText.TITLE_NOTICE, "ประกาศ");
             thTexts.Add(GameText.TITLE_REGISTER_SUCCESS, "ลงทะเบียนสำเร็จ");
             thTexts.Add(GameText.TITLE_BUTTON_OK, "ตกลง");
+            thTexts.Add(GameText.TITLE_BUTTON_YES, "ใช่");
             thTexts.Add(GameText.TITLE_BUTTON_CANCEL, "ยกเลิก");
             thTexts.Add(GameText.TITLE_ADVENTURE, "ผจญภัย");
+            thTexts.Add(GameText.TITLE_NAME_CONFIRM, "ยืนยันชื่อ : ");
             Languages.Add("TH", thTexts);
 
         }

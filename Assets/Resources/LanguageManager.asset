@@ -80,7 +80,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 20
+      Data: 23
     - Name: 
       Entry: 7
       Data: 
@@ -315,10 +315,46 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
+      Data: TEXT_TITLE_BUTTON_YES
+    - Name: $v
+      Entry: 1
+      Data: "\u0E43\u0E0A\u0E48"
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
       Data: TEXT_TITLE_BUTTON_CANCEL
     - Name: $v
       Entry: 1
       Data: "\u0E22\u0E01\u0E40\u0E25\u0E34\u0E01"
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: TEXT_TITLE_ADVENTURE
+    - Name: $v
+      Entry: 1
+      Data: "\u0E1C\u0E08\u0E0D\u0E20\u0E31\u0E22"
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: TEXT_TITLE_NAME_CONFIRM
+    - Name: $v
+      Entry: 1
+      Data: "\u0E22\u0E37\u0E19\u0E22\u0E31\u0E19\u0E0A\u0E37\u0E48\u0E2D : "
     - Name: 
       Entry: 8
       Data: 

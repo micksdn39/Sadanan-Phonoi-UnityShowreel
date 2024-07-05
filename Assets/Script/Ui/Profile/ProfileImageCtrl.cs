@@ -9,10 +9,10 @@ namespace Script.Ui.Profile
     { 
         [SerializeField] private GameObject root;
 
-        public void Active(bool value)
+        private void Start()
         {
-            root.gameObject.SetActive(value);
-        }
+            RefreshUi();
+        } 
         protected override void InitTabCallback()
         { 
         }
