@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script.Database.ProfileData
@@ -7,6 +8,6 @@ namespace Script.Database.ProfileData
     {
         public int profileId;
         public string profileName;
-        public Sprite profileIcon;
+        [PreviewField(100,ObjectFieldAlignment.Left)] public Sprite profileIcon;
     }
 }

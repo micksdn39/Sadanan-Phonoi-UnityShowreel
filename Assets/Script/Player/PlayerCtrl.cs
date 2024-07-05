@@ -6,7 +6,7 @@ namespace Script.Player
 {
     public class PlayerCtrl : SerializedMonoBehaviour
     {
-       [OdinSerialize,ReadOnly] private PlayerInfo playerInfo;
+       [OdinSerialize,ReadOnly] public PlayerInfo playerInfo { get; private set; }
        
        public void SetPlayerInfo(PlayerInfo playerInfo)
        {

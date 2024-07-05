@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profileId: 2
   profileName: Profile2
-  profileIcon: {fileID: 0}
+  profileIcon: {fileID: 21300000, guid: 311a28b5a15471b4682176cd605f240b, type: 3}

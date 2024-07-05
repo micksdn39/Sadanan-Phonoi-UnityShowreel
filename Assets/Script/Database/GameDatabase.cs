@@ -10,6 +10,10 @@ namespace Script.Database
         [Header("ProfileDatabase")]
         public List<ProfileDataSO> listOfProfileData;
 
+        public ProfileDataSO GetProfileData(int id)
+        {
+            return listOfProfileData.Find(x => x.profileId == id);
+        }
         
 
     }
