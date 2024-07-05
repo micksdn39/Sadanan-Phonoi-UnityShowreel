@@ -44,11 +44,11 @@ namespace Script.Game
         }
         public void OnButtonClick_ConfirmRegister()
         {
-            GameInstance.GameService.PlayerRegister(new PlayerInfo
-            {
-                playerName = name,
-                profileId = profileId 
-            });
+            GameInstance.GameService.RegisterAnonymous(
+                new PlayerInfo()
+                    .SetPlayerName(name)
+                    .SetProfileId(profileId));
+            
             profileImageCtrl.Active(false);
             
             string registerSuccess = GameInstance.LanguageManager.GetText(GameText.TITLE_REGISTER_SUCCESS);
@@ -61,7 +61,7 @@ namespace Script.Game
             void Callback(DialogResult result)
             {
                 if (result == DialogResult.OK)
-                {
+                { 
                     OnRegisterSuccess?.Invoke();
                 }
             }

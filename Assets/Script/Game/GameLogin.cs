@@ -1,3 +1,4 @@
+using Script.Player;
 using Script.Save; 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,12 +29,13 @@ namespace Script.Game
                     isOpenRegister = true;
                     tabToStartGameObject.SetActive(false);
                     return;
-                } 
+                }  
                 LoadNewScene(); 
             }
         } 
         private void LoadNewScene()
         {
+            GameInstance.PlayerCtrl.SetPlayerInfo(GameInstance.GameService.LoginAnonymous());
             SceneManager.LoadScene(loadSceneName); 
         }  
         public void OnButtonClick_Exit()

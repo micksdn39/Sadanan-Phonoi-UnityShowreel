@@ -27,6 +27,7 @@ namespace Script.Save
             var data = PlayerPrefs.GetString(key);
             
             Debug.Log("Loaded key: " + key); 
+            Debug.Log(data);
             return !string.IsNullOrEmpty(data) ? 
                 JsonUtility.FromJson<T>(data) : defaultValue;
         }
@@ -51,9 +52,10 @@ namespace Script.Save
             {
                 var data = JsonUtility.ToJson(value);
                 PlayerPrefs.SetString(key, data);
+                Debug.Log("Saved key: " + key + " value: " + data); 
             }
             PlayerPrefs.Save();
-            Debug.Log("Saved key: " + key); 
+           // Debug.Log("Saved key: " + key); 
         } 
         public static void Save(params (string key, object value)[] values)
         {

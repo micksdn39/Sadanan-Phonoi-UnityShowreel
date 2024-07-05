@@ -3544,6 +3544,7 @@ GameObject:
   - component: {fileID: 1305292966}
   - component: {fileID: 1305292965}
   - component: {fileID: 1305292967}
+  - component: {fileID: 1305292968}
   m_Layer: 0
   m_Name: (script) GameInstance
   m_TagString: Untagged
@@ -3566,6 +3567,7 @@ MonoBehaviour:
   gameDatabase: {fileID: 11400000, guid: 2871cf949eeab7842857c8de6b46c529, type: 2}
   gameService: {fileID: 1305292967}
   languageManager: {fileID: 11400000, guid: 82263d39e809f4a43beb32e7cbc2ce73, type: 2}
+  playerCtrl: {fileID: 1305292968}
 --- !u!4 &1305292966
 Transform:
   m_ObjectHideFlags: 0
@@ -3593,6 +3595,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed0fd0b0306b3e438b9b1b49e8405a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1305292968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305292964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214ee97585a465e4c8e977147f1dd8dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: playerInfo
+      Entry: 7
+      Data: 0|Script.Player.PlayerInfo, Assembly-CSharp
+    - Name: playerName
+      Entry: 1
+      Data: 
+    - Name: profileId
+      Entry: 3
+      Data: 0
+    - Name: currencyInfo
+      Entry: 7
+      Data: 1|Script.Player.CurrencyInfo, Assembly-CSharp
+    - Name: gold
+      Entry: 4
+      Data: 100
+    - Name: gem
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &1344932634
 GameObject:
   m_ObjectHideFlags: 0

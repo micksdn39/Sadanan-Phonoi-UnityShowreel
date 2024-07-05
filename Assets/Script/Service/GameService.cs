@@ -10,9 +10,13 @@ namespace Script.Service
         public event Action OnServiceStart;
         public event Action OnServiceFinish;
          
-        public void PlayerRegister(PlayerInfo player)
+        public void RegisterAnonymous(PlayerInfo player)
         {
             ClientSave.Save(SaveKey.PlayerInfo,player);
+        } 
+        public PlayerInfo LoginAnonymous()
+        {
+            return  ClientSave.Load<PlayerInfo>(SaveKey.PlayerInfo);
         } 
     }
 }

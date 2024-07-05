@@ -1,5 +1,6 @@
 using Script.Database;
 using Script.Language;
+using Script.Player;
 using Script.Service;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ namespace Script.Game
         public LanguageManager languageManager;
         public static LanguageManager LanguageManager { get; private set; }
 
+        public PlayerCtrl playerCtrl;
+        public static PlayerCtrl PlayerCtrl { get; private set; }
+
         private void Awake()
         {
             if (Singleton != null)
@@ -31,6 +35,7 @@ namespace Script.Game
             GameDatabase = gameDatabase;
             GameService = gameService;
             LanguageManager = languageManager;
+            PlayerCtrl = playerCtrl;
         }
 
     }
