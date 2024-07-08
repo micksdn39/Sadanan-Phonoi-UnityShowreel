@@ -26,3 +26,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e53310fc4419e5488cd59096e8d4ff7, type: 2}
   - {fileID: 11400000, guid: a347cb36c421873418a4171996dcc87f, type: 2}
   - {fileID: 11400000, guid: d6ca7bd2bfa2a4e4fb6acdceab065bd1, type: 2}
+  listOfCharacter:
+  - {fileID: 11400000, guid: 3403533b5f795d6488fed7e4fa9953ef, type: 2}
+  - {fileID: 11400000, guid: 0540420c0d7dcf24090d87ff503f4c14, type: 2}
+  - {fileID: 11400000, guid: 45aa272b71dddc7408c70baee4b0b6be, type: 2}
+  - {fileID: 11400000, guid: 6981fdf35c52fc145b009ce23bc3a157, type: 2}
+  listOfCharacterShopSettings:
+  - {fileID: 11400000, guid: 26ab688004c73964b8611d846e962582, type: 2}
+  - {fileID: 11400000, guid: 83a85debc8205cf45b4ea4f49a1f224e, type: 2}

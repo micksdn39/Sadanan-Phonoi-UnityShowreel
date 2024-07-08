@@ -3,6 +3,7 @@ using Script.Database.Shop;
 using Script.Enum;
 using Script.Player;
 using Script.Save;
+using Script.Service.Character;
 using UnityEngine;
 
 namespace Script.Service
@@ -13,7 +14,6 @@ namespace Script.Service
         public event Action OnServiceFinish;
 
         private PlayerInfo playerData;
-
         private void SavePlayerData()
         {
             ClientSave.Save(SaveKey.PlayerInfo,playerData);
@@ -65,6 +65,25 @@ namespace Script.Service
             onFinish(new PlayerInfoResult { player = playerData.Clone() }); 
             
             SavePlayerData();
+        }
+
+        public void GetGashaponList(Action<GashaponResult> onFinish)
+        {
+            GashaponData gashaponData = new GashaponData();
+            onFinish(new GashaponResult { gashaponList = gashaponData.gashaponList });
+        }
+        public void GashaponRandom(int gashaId,Action<CharacterResult> onFinish)
+        {
+            GashaponData gashaponData = new GashaponData();
+            var gashapon = gashaponData.GetRandomGashapon(gashaId);
+            playerData.AddCharacter(gashapon);
+            onFinish(new CharacterResult { characterId = gashapon }); 
+        }
+        public void GashaponRandomList(int gashaId,Action<CharacterListResult> onFinish)
+        {
+            GashaponData gashaponData = new GashaponData();
+            var characterList = gashaponData.GetCharacterList(gashaId);
+            onFinish(new CharacterListResult { characterListId = characterList });
         }
     }
 }

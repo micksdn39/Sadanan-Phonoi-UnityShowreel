@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Script.Player;
+using Script.Service.Character;
 using UnityEngine;
 
 namespace Script.Service
@@ -21,5 +23,19 @@ namespace Script.Service
     {
         public PlayerInfo player;
     }
-    
+    [System.Serializable]
+    public class CharacterResult : GameServiceResult
+    {
+        public int characterId;
+    }
+    [System.Serializable]
+    public class CharacterListResult : GameServiceResult
+    {
+        public List<int> characterListId;
+    }
+    [System.Serializable]
+    public class GashaponResult : GameServiceResult
+    {
+        public List<Gashapon> gashaponList;
+    }
 }

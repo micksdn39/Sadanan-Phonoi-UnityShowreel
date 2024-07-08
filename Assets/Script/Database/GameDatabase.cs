@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Script.Database.Character;
 using Script.Database.ProfileData;
 using Script.Database.Shop;
 using Script.Enum;
@@ -15,6 +16,12 @@ namespace Script.Database
         
         [Title("CurrencyShopDatabase")]
         public List<CurrencyShopSO> listOfCurrencyShop;
+        
+        [Title("CharacterDatabase")]
+        public List<CharacterSO> listOfCharacter;
+        
+        [Title("CharacterShopSettingsDatabase")]
+        public List<CharacterShopSettingSO> listOfCharacterShopSettings;
 
         public ProfileDataSO GetProfileData(int id)
         {
@@ -23,6 +30,14 @@ namespace Script.Database
         public List<CurrencyShopSO> GetCurrencyShop(GameEnum.ECurrency currencyType)
         {
             return listOfCurrencyShop.FindAll(x => x.CurrencyReward.currencyType == currencyType);
+        } 
+        public CharacterSO GetCharacter(int id)
+        {
+            return listOfCharacter.Find(x => x.characterId == id);
+        } 
+        public CharacterShopSettingSO GetCharacterShopSetting(int id)
+        {
+            return listOfCharacterShopSettings.Find(x => x.gashaponId == id);
         }
 
     }

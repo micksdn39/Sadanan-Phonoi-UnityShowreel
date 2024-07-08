@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Script.Player
@@ -9,6 +10,8 @@ namespace Script.Player
         [SerializeField] public string playerName;
         [SerializeField] public int profileId ;
         [SerializeField] public CurrencyInfo currencyInfo ; 
+        [SerializeField] public List<CharacterInfo> characterInfo ; 
+
         public delegate void OnPlayerProfileEvent(PlayerInfo playerInfo); 
         [HideInInspector] public OnPlayerProfileEvent OnPlayerProfileChanged;
         public PlayerInfo()
@@ -16,15 +19,20 @@ namespace Script.Player
             playerName = "";
             profileId = 0;
             currencyInfo = new CurrencyInfo();
+            characterInfo = new List<CharacterInfo>();
         }
-
+        public void AddCharacter(int characterId)
+        {
+            characterInfo.Add(new CharacterInfo(characterId));
+        }
         public PlayerInfo Clone()
         {
             return new PlayerInfo
             {
                 playerName = playerName,
                 profileId = profileId,
-                currencyInfo = currencyInfo
+                currencyInfo = currencyInfo,
+                characterInfo = characterInfo
             };
         }
         public PlayerInfo SetPlayerName(string name)

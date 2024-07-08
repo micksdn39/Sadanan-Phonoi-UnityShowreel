@@ -10,5 +10,12 @@ namespace Script.Enum
             GEM = 1,
             USD = 2
         }
+        public enum ETier
+        {
+            COMMON = 0,
+            RARE = 1,
+            EPIC = 2,
+            LEGEND = 3
+        }
     }
 }
