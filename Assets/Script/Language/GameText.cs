@@ -25,6 +25,7 @@ namespace Script.Language
         public const string TITLE_NOTICE = TEXT_PREFIX + "TITLE_NOTICE";
         public const string TITLE_ADVENTURE = TEXT_PREFIX + "TITLE_ADVENTURE";
         public const string TITLE_NAME_CONFIRM = TEXT_PREFIX + "TITLE_NAME_CONFIRM";
+        public const string TITLE_VIRTUAL_CURRENCY_PURCHASE = TEXT_PREFIX + "TITLE_VIRTUAL_CURRENCY_PURCHASE";
         
         public const string TITLE_BUTTON_OK = TEXT_PREFIX + "TITLE_BUTTON_OK";
         public const string TITLE_BUTTON_YES = TEXT_PREFIX + "TITLE_BUTTON_YES";
@@ -75,6 +76,7 @@ namespace Script.Language
             engTexts.Add(GameText.TITLE_BUTTON_CANCEL, "Cancel");
             engTexts.Add(GameText.TITLE_ADVENTURE, "Adventure");
             engTexts.Add(GameText.TITLE_NAME_CONFIRM, "Confirm Name : ");
+            engTexts.Add(GameText.TITLE_VIRTUAL_CURRENCY_PURCHASE, "Virtual Currency Purchase");
             Languages.Add(ELanguage.ENG, engTexts);
 
             Dictionary<string, string> thTexts = new Dictionary<string, string>();
@@ -101,6 +103,7 @@ namespace Script.Language
             thTexts.Add(GameText.TITLE_BUTTON_CANCEL, "ยกเลิก");
             thTexts.Add(GameText.TITLE_ADVENTURE, "ผจญภัย");
             thTexts.Add(GameText.TITLE_NAME_CONFIRM, "ยืนยันชื่อ : ");
+            thTexts.Add(GameText.TITLE_VIRTUAL_CURRENCY_PURCHASE,"ระบบจำลองซื้อไอเทม");
             Languages.Add(ELanguage.TH, thTexts);
 
         } 

@@ -54,17 +54,8 @@ namespace Script.Game
         public void OnButtonClick_ConfirmEnterName()
         {
             string nameConfirm = GameInstance.LanguageManager.GetText(GameText.TITLE_NAME_CONFIRM) + name;
-            string buttonYes = GameInstance.LanguageManager.GetText(GameText.TITLE_BUTTON_YES);
-            string buttonCancel = GameInstance.LanguageManager.GetText(GameText.TITLE_BUTTON_CANCEL);
             
-            BasicMessageBox.Show(
-                new BasicMessageBoxInfo(nameConfirm, 
-                   new ButtonEntryInfo[]
-                   {
-                       new ( buttonYes, DialogResult.Yes),
-                       new ( buttonCancel, DialogResult.Cancel)
-                   }), 
-                Callback);
+            Dialog.BasicMessageYesNo(nameConfirm,Callback);
             
             void Callback(DialogResult result)
             {

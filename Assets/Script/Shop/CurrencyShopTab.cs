@@ -1,4 +1,9 @@
+using System;
 using Script.Database.Shop;
+using Script.DialogBox;
+using Script.Game;
+using Script.Language;
+using Script.Service;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +21,25 @@ namespace Script.Shop
 
         protected override void OnClick()
         { 
+            Dialog.BasicMessageYesNo(
+                GameInstance.LanguageManager.GetText(GameText.TITLE_VIRTUAL_CURRENCY_PURCHASE),Callback);
+            
+            void Callback(DialogResult result)
+            {
+                if (result == DialogResult.Yes)
+                { 
+                   GameInstance.GameService.PurchaseVirtualCurrency(
+                       info,result =>
+                       {
+                           if(result.Success)
+                               GameInstance.PlayerCtrl.SetPlayerInfo(result.player);
+                           else
+                           {
+                               Dialog.BasicMessageOK(result.error,null);
+                           }
+                       });
+                } 
+            } 
         }
 
         protected override void Disable()

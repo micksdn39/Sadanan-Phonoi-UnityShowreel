@@ -39,8 +39,12 @@ namespace Script.Game
         } 
         private void LoadNewScene()
         {
-            GameInstance.PlayerCtrl.SetPlayerInfo(GameInstance.GameService.LoginAnonymous());
-            SceneManager.LoadScene(loadSceneName); 
+            GameInstance.GameService.LoginAnonymous(result =>
+            {
+                GameInstance.PlayerCtrl.SetPlayerInfo(result.player);
+                
+                SceneManager.LoadScene(loadSceneName); 
+            }); 
         }  
         public void OnButtonClick_Exit()
         {
