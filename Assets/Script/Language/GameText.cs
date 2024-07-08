@@ -32,8 +32,22 @@ namespace Script.Language
     }
     
       public static class DefaultLocale
-    { 
-        public static Dictionary<string, Dictionary<string, string>> Languages { get; private set; } = new Dictionary<string, Dictionary<string, string>>();
+    {
+        private enum ELanguage
+        {
+            ENG = 0,
+            TH = 1
+        }
+        public static Dictionary<string, string> GetLanguage(string key)
+        {
+            return Languages[GetCurrentLanguageKey(key)];
+        } 
+        public static bool IsContainsKey(string key)
+        {
+            return Languages.ContainsKey(GetCurrentLanguageKey(key));
+        }
+        private static Dictionary<ELanguage, Dictionary<string, string>> Languages
+            = new Dictionary<ELanguage, Dictionary<string, string>>();
 
         static DefaultLocale()
         {
@@ -53,7 +67,7 @@ namespace Script.Language
             engTexts.Add(GameText.TITLE_CONFIRM, "Confirm");
             engTexts.Add(GameText.TITLE_PROFILE, "Profile");
             engTexts.Add(GameText.TITLE_SELECTED_PROFILE, "Selected Profile");
-            engTexts.Add(GameText.TITLE_SELECTED_TEXT, "Selected Text");
+            engTexts.Add(GameText.TITLE_SELECTED_TEXT, "Select");
             engTexts.Add(GameText.TITLE_NOTICE, "Notice");
             engTexts.Add(GameText.TITLE_REGISTER_SUCCESS, "Register Success");
             engTexts.Add(GameText.TITLE_BUTTON_OK, "OK");
@@ -61,7 +75,7 @@ namespace Script.Language
             engTexts.Add(GameText.TITLE_BUTTON_CANCEL, "Cancel");
             engTexts.Add(GameText.TITLE_ADVENTURE, "Adventure");
             engTexts.Add(GameText.TITLE_NAME_CONFIRM, "Confirm Name : ");
-            Languages.Add("ENG", engTexts);
+            Languages.Add(ELanguage.ENG, engTexts);
 
             Dictionary<string, string> thTexts = new Dictionary<string, string>();
             thTexts.Add(GameText.TITLE_NOW_LOADING, "กำลังโหลด");
@@ -87,8 +101,18 @@ namespace Script.Language
             thTexts.Add(GameText.TITLE_BUTTON_CANCEL, "ยกเลิก");
             thTexts.Add(GameText.TITLE_ADVENTURE, "ผจญภัย");
             thTexts.Add(GameText.TITLE_NAME_CONFIRM, "ยืนยันชื่อ : ");
-            Languages.Add("TH", thTexts);
+            Languages.Add(ELanguage.TH, thTexts);
 
-        }
-    }
+        } 
+        private static ELanguage GetCurrentLanguageKey(string key)
+        {
+            key = key.ToUpper();
+            return key switch
+            {
+                "ENG" => ELanguage.ENG,
+                "TH" => ELanguage.TH,
+                _ => ELanguage.ENG
+            };
+        } 
+    } 
 }

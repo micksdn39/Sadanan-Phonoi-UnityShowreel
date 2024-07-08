@@ -22,17 +22,17 @@ namespace Script.Language
         { 
             CurrentLanguageKey = ClientSave.Load(playerPrefsKey, defaultLanguageKey);
              
-            texts = DefaultLocale.Languages[CurrentLanguageKey];
+            texts = DefaultLocale.GetLanguage(defaultLanguageKey);
             ChangeLanguage(CurrentLanguageKey);
         }
         [Button]
         public void ChangeLanguage(string languageKey)
         {
-            if (!DefaultLocale.Languages.ContainsKey(languageKey))
+            if (!DefaultLocale.IsContainsKey(languageKey))
                 return;
              
             CurrentLanguageKey = languageKey;
-            texts = DefaultLocale.Languages[CurrentLanguageKey];
+            texts = DefaultLocale.GetLanguage(languageKey);
             OnLanguageChanged?.Invoke();
             ClientSave.Save(playerPrefsKey, CurrentLanguageKey);
         }
