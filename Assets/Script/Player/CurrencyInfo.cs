@@ -7,20 +7,25 @@ namespace Script.Player
     {
         [SerializeField] public float gold ;
         [SerializeField] public float gem ;
-
+        public delegate void OnPlayerCurrencyEvent(CurrencyInfo currencyInfo); 
+        public OnPlayerCurrencyEvent OnPlayerCurrencyChanged;
         public CurrencyInfo()
         {
             gold = 100;
             gem = 0;
         }
 
-        public void SetGold(float gold)
+        public CurrencyInfo SetGold(float gold)
         {
             this.gold = gold;
+            OnPlayerCurrencyChanged?.Invoke(this);
+            return this;
         }
-        public void SetGem(float gem)
+        public CurrencyInfo SetGem(float gem)
         {
             this.gem = gem;
+            OnPlayerCurrencyChanged?.Invoke(this);
+            return this;
         }
     }
 }

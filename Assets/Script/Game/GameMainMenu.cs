@@ -10,16 +10,22 @@ namespace Script.Game
         private void Start()
         {
             SubscribePlayerProfile();
-        }
-
+            SubscribeCurrency();
+        } 
         private void OnDestroy()
         {
-            GameInstance.PlayerCtrl.playerInfo.OnPlayerInfoChanged -= panelMainMenu.SetProfileInfo;
+            GameInstance.PlayerCtrl.playerInfo.currencyInfo.OnPlayerCurrencyChanged -= panelMainMenu.SetCurrency;
+            GameInstance.PlayerCtrl.playerInfo.OnPlayerProfileChanged -= panelMainMenu.SetProfileInfo;
         } 
         private void SubscribePlayerProfile()
         { 
             panelMainMenu.SetProfileInfo(GameInstance.PlayerCtrl.playerInfo);
-            GameInstance.PlayerCtrl.playerInfo.OnPlayerInfoChanged += panelMainMenu.SetProfileInfo;
+            GameInstance.PlayerCtrl.playerInfo.OnPlayerProfileChanged += panelMainMenu.SetProfileInfo; 
+        }
+        private void SubscribeCurrency()
+        {
+            panelMainMenu.SetCurrency(GameInstance.PlayerCtrl.playerInfo.currencyInfo);
+            GameInstance.PlayerCtrl.playerInfo.currencyInfo.OnPlayerCurrencyChanged += panelMainMenu.SetCurrency; 
         }
     }
 }

@@ -9,8 +9,8 @@ namespace Script.Player
         [SerializeField] public string playerName;
         [SerializeField] public int profileId ;
         [SerializeField] public CurrencyInfo currencyInfo ; 
-        public delegate void OnPlayerInfoChangedEvent(PlayerInfo playerInfo); 
-        public OnPlayerInfoChangedEvent OnPlayerInfoChanged;
+        public delegate void OnPlayerProfileEvent(PlayerInfo playerInfo); 
+        public OnPlayerProfileEvent OnPlayerProfileChanged;
         public PlayerInfo()
         {
             playerName = "";
@@ -20,13 +20,13 @@ namespace Script.Player
         public PlayerInfo SetPlayerName(string name)
         {
             playerName = name;
-            OnPlayerInfoChanged?.Invoke(this);
+            OnPlayerProfileChanged?.Invoke(this);
             return this;
         }
         public PlayerInfo SetProfileId(int id)
         {
             profileId = id;
-            OnPlayerInfoChanged?.Invoke(this);
+            OnPlayerProfileChanged?.Invoke(this);
             return this; 
         }
     }

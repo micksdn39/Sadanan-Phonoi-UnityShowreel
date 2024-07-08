@@ -914,7 +914,7 @@ GameObject:
   - component: {fileID: 507149370}
   - component: {fileID: 507149369}
   m_Layer: 5
-  m_Name: (text) currency
+  m_Name: (text) currency (gem)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1269,6 +1269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profileImage: {fileID: 1325449957}
   playerName: {fileID: 634674476}
+  goldText: {fileID: 1433411024}
+  gemText: {fileID: 507149369}
 --- !u!4 &573919034
 Transform:
   m_ObjectHideFlags: 0
@@ -3247,7 +3249,7 @@ GameObject:
   - component: {fileID: 1433411025}
   - component: {fileID: 1433411024}
   m_Layer: 5
-  m_Name: (text) currency
+  m_Name: (text) currency (gold)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
