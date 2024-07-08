@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Script.DialogBox;
 using Script.Language;
 using Script.Player;
@@ -10,11 +11,10 @@ using UnityEngine;
 
 namespace Script.Game
 {
-    public class GameRegister : MonoBehaviour
+    public class GameRegister : SerializedMonoBehaviour
     {
-        [SerializeField] private GameObject registerRoot; 
-        [SerializeField] private GameObject enterNameRoot; 
-        [SerializeField] private GameObject profileRoot;
+        [Title("Panel Root")] 
+        [SerializeField] private Dictionary<ERegisterRoot,GameObject> registerRoot;  
         [Space]
         [SerializeField] private TMP_InputField inputFieldName;
         [SerializeField] private ProfileImageCtrl profileImageCtrl;
@@ -102,26 +102,21 @@ namespace Script.Game
             switch (root)
             {
                 case ERegisterRoot.NONE:
-                    registerRoot.SetActive(false);
-                    enterNameRoot.SetActive(false);
-                    profileRoot.SetActive(false);
+                    foreach (var r in registerRoot) 
+                        r.Value.SetActive(false); 
                     break;
                 case ERegisterRoot.REGISTER:
-                    registerRoot.SetActive(true);
-                    enterNameRoot.SetActive(false);
-                    profileRoot.SetActive(false);
+                    foreach (var r in registerRoot) 
+                        r.Value.SetActive(r.Key == ERegisterRoot.REGISTER); 
                     break;
                 case ERegisterRoot.ENTER_NAME:
-                    registerRoot.SetActive(false);
-                    enterNameRoot.SetActive(true);
-                    profileRoot.SetActive(false);
+                    foreach (var r in registerRoot) 
+                        r.Value.SetActive(r.Key == ERegisterRoot.ENTER_NAME); 
                     break;
                 case ERegisterRoot.PROFILE:
-                    registerRoot.SetActive(false);
-                    enterNameRoot.SetActive(false);
-                    profileRoot.SetActive(true);
-                    break;
-                
+                    foreach (var r in registerRoot) 
+                        r.Value.SetActive(r.Key == ERegisterRoot.PROFILE); 
+                    break; 
             }
         }
     }

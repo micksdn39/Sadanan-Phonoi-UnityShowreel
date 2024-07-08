@@ -7,7 +7,8 @@ using UnityEngine;
 namespace Script.Game
 {
     public class GameInstance : MonoBehaviour
-    {  
+    {
+        public static bool IsInitialized { get; private set; } = false;
         public static GameInstance Singleton { get; private set; }
         
         public GameDatabase gameDatabase; 
@@ -29,6 +30,8 @@ namespace Script.Game
                 Destroy(gameObject);
                 return;
             }
+
+            IsInitialized = true;
             Singleton = this;
             DontDestroyOnLoad(gameObject); 
             

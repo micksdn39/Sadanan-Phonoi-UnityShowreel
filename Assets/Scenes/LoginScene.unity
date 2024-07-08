@@ -3058,9 +3058,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba926bcd677393149937ba201ff6a7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registerRoot: {fileID: 704246131}
-  enterNameRoot: {fileID: 684950470}
-  profileRoot: {fileID: 249292272}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 704246131}
+    - {fileID: 684950470}
+    - {fileID: 249292272}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: registerRoot
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Script.Game.GameRegister+ERegisterRoot,
+        Assembly-CSharp],[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Script.Game.GameRegister+ERegisterRoot,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   inputFieldName: {fileID: 1062071532}
   profileImageCtrl: {fileID: 1414246070}
 --- !u!4 &1066221944
@@ -3819,16 +3890,16 @@ MonoBehaviour:
     - Name: currencyInfo
       Entry: 7
       Data: 1|Script.Player.CurrencyInfo, Assembly-CSharp
-    - Name: gold
-      Entry: 4
-      Data: 100
-    - Name: gem
-      Entry: 4
-      Data: 0
+    - Name: currencyList
+      Entry: 6
+      Data: 
+    - Name: OnPlayerCurrencyChanged
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: OnPlayerInfoChanged
+    - Name: OnPlayerProfileChanged
       Entry: 6
       Data: 
     - Name: 

@@ -19,3 +19,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c041f60c722b7b469c2c0568c3024ec, type: 2}
   - {fileID: 11400000, guid: a30a3819d186c3442bb74c8be3dd9f5b, type: 2}
   - {fileID: 11400000, guid: 71f2f2fbf1a24b84bafdc4b51f2fff1d, type: 2}
+  listOfCurrencyShop:
+  - {fileID: 11400000, guid: 7dc7601e17c3c1547aea39aa6e2c4f87, type: 2}
+  - {fileID: 11400000, guid: f5912fad61cfec74b9b585a86916c234, type: 2}
+  - {fileID: 11400000, guid: 46b3231bfab96b246964b8138fc9be61, type: 2}
+  - {fileID: 11400000, guid: 8e53310fc4419e5488cd59096e8d4ff7, type: 2}
+  - {fileID: 11400000, guid: a347cb36c421873418a4171996dcc87f, type: 2}
+  - {fileID: 11400000, guid: d6ca7bd2bfa2a4e4fb6acdceab065bd1, type: 2}

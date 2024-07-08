@@ -16,7 +16,7 @@ namespace Script.Service
         } 
         public PlayerInfo LoginAnonymous()
         {
-            return  ClientSave.Load<PlayerInfo>(SaveKey.PlayerInfo);
+            return ClientSave.Load<PlayerInfo>(SaveKey.PlayerInfo);
         } 
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Script
@@ -11,9 +12,9 @@ namespace Script
     {   
         [SerializeField,Header("Tab")] protected Transform content;
         [SerializeField,Header("Tab")] protected TOne tabPrefab;
-        [SerializeField,Header("Tab")] protected List<TOne> listOfTabs;
+        [SerializeField,ReadOnly,Header("Tab")] protected List<TOne> listOfTabs;
         [Space]
-        [SerializeField,Header("Info")] protected List<TTwo> listOfInfo; 
+        [SerializeField,ReadOnly,Header("Info")] protected List<TTwo> listOfInfo; 
  
         private void InitTab()
         {    

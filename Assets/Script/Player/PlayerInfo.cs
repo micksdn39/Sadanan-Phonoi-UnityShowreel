@@ -10,12 +10,22 @@ namespace Script.Player
         [SerializeField] public int profileId ;
         [SerializeField] public CurrencyInfo currencyInfo ; 
         public delegate void OnPlayerProfileEvent(PlayerInfo playerInfo); 
-        public OnPlayerProfileEvent OnPlayerProfileChanged;
+        [HideInInspector] public OnPlayerProfileEvent OnPlayerProfileChanged;
         public PlayerInfo()
         {
             playerName = "";
             profileId = 0;
             currencyInfo = new CurrencyInfo();
+        }
+
+        public PlayerInfo Clone()
+        {
+            return new PlayerInfo
+            {
+                playerName = playerName,
+                profileId = profileId,
+                currencyInfo = currencyInfo
+            };
         }
         public PlayerInfo SetPlayerName(string name)
         {

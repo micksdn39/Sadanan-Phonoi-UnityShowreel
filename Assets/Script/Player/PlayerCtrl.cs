@@ -10,7 +10,7 @@ namespace Script.Player
        
        public void SetPlayerInfo(PlayerInfo playerInfo)
        {
-           this.playerInfo = playerInfo;
-       }
+           this.playerInfo = playerInfo.Clone();
+       } 
     }
 }

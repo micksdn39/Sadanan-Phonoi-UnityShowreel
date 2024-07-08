@@ -12,6 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80a77cf55bc3934fb93ac6b4b8c51b1, type: 3}
   m_Name: Profile6
   m_EditorClassIdentifier: 
-  profileId: 6
-  profileName: Profile6
-  profileIcon: {fileID: 21300000, guid: 08d2df548d3de974791be5b40081db8d, type: 3}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: 1b9bb45e5a49af14fa25912e0bcdb7a6, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: profileId
+      Entry: 3
+      Data: 6
+    - Name: profileIcon
+      Entry: 10
+      Data: 0
+  <profileName>k__BackingField: prifile 6
