@@ -8,17 +8,17 @@ namespace Script.Save
         public static void Delete(string key)
         {
             PlayerPrefs.DeleteKey(key);
-            Debug.Log("Deleted key: " + key); 
+         //   Debug.Log("Deleted key: " + key); 
         }
 
         public static void DeleteAll()
         {
             PlayerPrefs.DeleteAll();
-            Debug.Log("Deleted all keys"); 
+          //  Debug.Log("Deleted all keys"); 
         }
         public static string Load (string key,string defaultValue = null)
         {
-            Debug.Log("Loaded key: " + key);
+            //Debug.Log("Loaded key: " + key);
             return string.IsNullOrEmpty(defaultValue) ? 
                 PlayerPrefs.GetString(key) : PlayerPrefs.GetString(key, defaultValue);
         }
@@ -26,8 +26,8 @@ namespace Script.Save
         {
             var data = PlayerPrefs.GetString(key);
             
-            Debug.Log("Loaded key: " + key); 
-            Debug.Log(data);
+          //  Debug.Log("Loaded key: " + key); 
+         //   Debug.Log(data);
             return !string.IsNullOrEmpty(data) ? 
                 JsonUtility.FromJson<T>(data) : defaultValue;
         }
@@ -39,7 +39,7 @@ namespace Script.Save
             {
                 values.Add(Load<T>(key));
             } 
-            Debug.Log("Loaded keys: " + string.Join(", ", keys));
+         //   Debug.Log("Loaded keys: " + string.Join(", ", keys));
             return values;
         } 
         public static void Save(string key, object value)
@@ -52,7 +52,7 @@ namespace Script.Save
             {
                 var data = JsonUtility.ToJson(value);
                 PlayerPrefs.SetString(key, data);
-                Debug.Log("Saved key: " + key + " value: " + data); 
+              //  Debug.Log("Saved key: " + key + " value: " + data); 
             }
             PlayerPrefs.Save();
            // Debug.Log("Saved key: " + key); 

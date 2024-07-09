@@ -47,5 +47,11 @@ namespace Script.Game
                     SceneManager.LoadScene(loadSceneName);
                 });
         }
+        
+        public void OnButtonClick_Development()
+        { 
+            Dialog.BasicMessageOK(GameInstance.LanguageManager.GetText(GameText.TITLE_ON_DEVELOPMENT),
+                result => { });
+        }
     }
 }

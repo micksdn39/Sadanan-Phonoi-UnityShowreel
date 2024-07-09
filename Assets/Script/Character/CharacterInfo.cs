@@ -24,7 +24,7 @@ public class CharacterInfo
     public CharacterInfo(int id)
     {
         characterId = id;
-        level = 0;
+        level = 1;
         exp = 0;
         statusPoint = 0; 
     }

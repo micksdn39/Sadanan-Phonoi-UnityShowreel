@@ -1,4 +1,5 @@
 using System;
+using Script.Character;
 using Script.Database.Shop;
 using Script.Enum;
 using Script.Player;
@@ -71,64 +72,119 @@ namespace Script.Service
         public void LogoutAnonymous()
         {
             ClientSave.Delete(SaveKey.CurrentAccount);
+        } 
+        public void GetUpdatePlayerInfo(Action<PlayerInfoResult> onFinish)
+        {
+            onFinish(new PlayerInfoResult{ player = playerData.Clone() });
         }
+
+        public void UpdatePlayerCharacterPosition(int position,int id,
+            Action<PlayerInfoResult> onFinish)
+        {
+            playerData.GetCharacterPosition(position).SetCharacterId(id);
+            
+            onFinish(new PlayerInfoResult { player = playerData.Clone() });
+            SavePlayerData();
+        }
+
+        #region Currency 
         public void PurchaseVirtualCurrency(CurrencyShopSO currencyShop,Action<PlayerInfoResult> onFinish)
         {
-            if (currencyShop.CurrencyPurchase.amount != 0)
-            { 
-                switch (currencyShop.CurrencyPurchase.currencyType)
-                {
-                    case GameEnum.ECurrency.GOLD:
-                        if (playerData.currencyInfo.gold < currencyShop.CurrencyPurchase.amount)
-                        {
-                            onFinish(new PlayerInfoResult{ error = GameServiceErrorCode.PlAYER_CURRENCY_NOT_ENOUGH });
-                            return;
-                        }
-                        playerData.currencyInfo.SetGold(playerData.currencyInfo.gold - currencyShop.CurrencyPurchase.amount);
-                        break;
-                    case GameEnum.ECurrency.GEM:
-                        if (playerData.currencyInfo.gem < currencyShop.CurrencyPurchase.amount)
-                        {
-                            onFinish(new PlayerInfoResult{ error = GameServiceErrorCode.PlAYER_CURRENCY_NOT_ENOUGH });
-                            return;
-                        }
-                        playerData.currencyInfo.SetGem(playerData.currencyInfo.gem - currencyShop.CurrencyPurchase.amount);
-                        break; 
-                }
-            }
-            switch (currencyShop.CurrencyReward.currencyType)
+            bool isVerify = VerifyPlayerCurrency(currencyShop.CurrencyPurchase);
+            if(!isVerify)
             {
-                case GameEnum.ECurrency.GOLD:
-                    playerData.currencyInfo.SetGold(playerData.currencyInfo.gold + currencyShop.CurrencyReward.amount);
-                    break;
-                case GameEnum.ECurrency.GEM:
-                    playerData.currencyInfo.SetGem(playerData.currencyInfo.gem + currencyShop.CurrencyReward.amount);
-                    break;
+                onFinish(new PlayerInfoResult { error = GameServiceErrorCode.PlAYER_CURRENCY_NOT_ENOUGH });
+                return;
             } 
+            IncreaseVirtualCurrency(currencyShop.CurrencyReward);
             onFinish(new PlayerInfoResult { player = playerData.Clone() }); 
             
             SavePlayerData();
         }
 
+        bool VerifyPlayerCurrency(CurrencyOptions currencyOptions,int amount=1)
+        {
+            if (currencyOptions.amount != 0)
+            { 
+                switch (currencyOptions.currencyType)
+                {
+                    case GameEnum.ECurrency.GOLD:
+                        if (playerData.currencyInfo.gold < (currencyOptions.amount * amount)) 
+                            return false;  
+                        break;
+                    case GameEnum.ECurrency.GEM:
+                        if (playerData.currencyInfo.gem < (currencyOptions.amount * amount)) 
+                            return false;  
+                        break; 
+                }
+                DecreaseVirtualCurrency(currencyOptions,amount);
+            } 
+            return true;
+        }
+
+        void DecreaseVirtualCurrency(CurrencyOptions currencyOptions,int amount=1)
+        {
+            switch (currencyOptions.currencyType)
+            {
+                case GameEnum.ECurrency.GOLD:
+                    playerData.currencyInfo.SetGold(playerData.currencyInfo.gold - (currencyOptions.amount * amount));
+                    break;
+                case GameEnum.ECurrency.GEM:
+                    playerData.currencyInfo.SetGem(playerData.currencyInfo.gem - (currencyOptions.amount*amount));
+                    break;
+            } 
+        }
+        void IncreaseVirtualCurrency(CurrencyOptions currencyOptions)
+        {
+            switch (currencyOptions.currencyType)
+            {
+                case GameEnum.ECurrency.GOLD:
+                    playerData.currencyInfo.SetGold(playerData.currencyInfo.gold + currencyOptions.amount);
+                    break;
+                case GameEnum.ECurrency.GEM:
+                    playerData.currencyInfo.SetGem(playerData.currencyInfo.gem + currencyOptions.amount);
+                    break;
+            } 
+        }
+
+        #endregion
+        
         #region Gashapon 
         public void GetGashaponList(Action<GashaponResult> onFinish)
         {
             GashaponData gashaponData = new GashaponData();
             onFinish(new GashaponResult { gashaponList = gashaponData.gashaponList });
         }
-        public void GetGashaponRandomList(int gashaId,Action<CharacterListResult> onFinish)
+        public void GashaponRandomList(int gashaId,Action<CharacterListResult> onFinish)
         {
             GashaponData gashaponData = new GashaponData();
+            
+            bool isVerify = VerifyPlayerCurrency(gashaponData.GetGashaponPrice(gashaId),10);
+            if(!isVerify)
+            {
+                onFinish(new CharacterListResult { error = GameServiceErrorCode.PlAYER_CURRENCY_NOT_ENOUGH });
+                return;
+            } 
+            
             var characterList = gashaponData.GetCharacterList(gashaId);
+            foreach (var c in characterList)  
+                playerData.AddCharacter(c); 
             onFinish(new CharacterListResult { characterListId = characterList });
+            SavePlayerData();
         } 
         public void GashaponRandom(int gashaId,Action<CharacterResult> onFinish)
         {
             GashaponData gashaponData = new GashaponData();
+            bool isVerify = VerifyPlayerCurrency(gashaponData.GetGashaponPrice(gashaId));
+            if(!isVerify)
+            {
+                onFinish(new CharacterResult { error = GameServiceErrorCode.PlAYER_CURRENCY_NOT_ENOUGH });
+                return;
+            } 
+            
             var gashapon = gashaponData.GetRandomGashapon(gashaId);
             playerData.AddCharacter(gashapon); 
-            onFinish(new CharacterResult { characterId = gashapon }); 
-            
+            onFinish(new CharacterResult { characterId = gashapon });
             SavePlayerData();
         } 
         #endregion

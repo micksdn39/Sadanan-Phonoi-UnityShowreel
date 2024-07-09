@@ -1,13 +1,14 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script
 {
-    public abstract class BaseTab<T> : MonoBehaviour where T : BaseInfo
+    public abstract class BaseTab<T> : SerializedMonoBehaviour where T : BaseInfo
     { 
         [SerializeField] private Image iconSelected;
-        [SerializeField] protected T info { get; private set; }
+        [SerializeField,ReadOnly] protected T info { get; private set; }
         public event Action OnDisableOtherTab;
         public event Action<T> OnClickTab;
         

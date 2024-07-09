@@ -68,8 +68,8 @@ namespace Script
         {
             Debug.Log("Failed to init Info");
         }
-        protected abstract void InitTabCallback();
         protected abstract void InitInfo(Action Success=null, Action Failed=null); 
+        protected abstract void InitTabCallback();
         protected abstract void Disable();
         protected abstract void OnClickTab(TTwo info);
         

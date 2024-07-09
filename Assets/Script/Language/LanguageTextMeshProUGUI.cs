@@ -16,6 +16,7 @@ namespace Script.Language
         private TextMeshProUGUI text;
         private void Start()
         {
+            if(!GameInstance.IsInitialized)return;
             text = GetComponent<TextMeshProUGUI>();
             text.font = GameInstance.LanguageManager.GetFont;
             
@@ -27,6 +28,7 @@ namespace Script.Language
 
         private void OnDestroy()
         {
+            if(!GameInstance.IsInitialized)return;
             GameInstance.LanguageManager.OnLanguageChanged -= SubscribeOnLanguageChanged;
         }
 

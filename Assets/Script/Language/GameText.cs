@@ -33,6 +33,7 @@ namespace Script.Language
         public const string TITLE_VIRTUAL_CURRENCY_PURCHASE = TEXT_PREFIX + "TITLE_VIRTUAL_CURRENCY_PURCHASE";
         public const string TITLE_WELLCOME = TEXT_PREFIX + "TITLE_WELCOME";
         public const string TITLE_SIGN_UP = TEXT_PREFIX + "TITLE_SIGN_UP";
+        public const string TITLE_ON_DEVELOPMENT = TEXT_PREFIX + "TITLE_ON_DEVELOPMENT";
         
         public const string TITLE_BUTTON_OK = TEXT_PREFIX + "TITLE_BUTTON_OK";
         public const string TITLE_BUTTON_YES = TEXT_PREFIX + "TITLE_BUTTON_YES";
@@ -90,6 +91,7 @@ namespace Script.Language
             engTexts.Add(GameText.TITLE_NAME_CONFIRM, "Confirm Name : ");
             engTexts.Add(GameText.TITLE_VIRTUAL_CURRENCY_PURCHASE, "Virtual Currency Purchase");
             engTexts.Add(GameText.TITLE_WELLCOME, "Welcome :");
+            engTexts.Add(GameText.TITLE_ON_DEVELOPMENT, "On Development !"); 
             Languages.Add(ELanguage.ENG, engTexts);
 
             Dictionary<string, string> thTexts = new Dictionary<string, string>();
@@ -123,6 +125,8 @@ namespace Script.Language
             thTexts.Add(GameText.TITLE_NAME_CONFIRM, "ยืนยันชื่อ : ");
             thTexts.Add(GameText.TITLE_VIRTUAL_CURRENCY_PURCHASE,"ระบบจำลองซื้อไอเทม");
             thTexts.Add(GameText.TITLE_WELLCOME, "ยินดีต้อนรับ :");
+            thTexts.Add(GameText.TITLE_ON_DEVELOPMENT, "อยู่ในช่วงพัฒนา !");
+            
             Languages.Add(ELanguage.TH, thTexts);
 
         } 

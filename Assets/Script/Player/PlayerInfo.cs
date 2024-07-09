@@ -11,6 +11,7 @@ namespace Script.Player
         [SerializeField] public int profileId ;
         [SerializeField] public CurrencyInfo currencyInfo ; 
         [SerializeField] public List<CharacterInfo> characterInfo ; 
+        [SerializeField] public List<PlayerCharacterPosition> characterPosition;
 
         public delegate void OnPlayerProfileEvent(PlayerInfo playerInfo); 
         [HideInInspector] public OnPlayerProfileEvent OnPlayerProfileChanged;
@@ -20,6 +21,7 @@ namespace Script.Player
             profileId = 0;
             currencyInfo = new CurrencyInfo();
             characterInfo = new List<CharacterInfo>();
+            characterPosition = new List<PlayerCharacterPosition>();
         }
         public void AddCharacter(int characterId)
         {
@@ -32,7 +34,8 @@ namespace Script.Player
                 playerName = playerName,
                 profileId = profileId,
                 currencyInfo = currencyInfo,
-                characterInfo = characterInfo
+                characterInfo = characterInfo,
+                characterPosition = characterPosition
             };
         }
         public PlayerInfo SetPlayerName(string name)
@@ -46,6 +49,34 @@ namespace Script.Player
             profileId = id;
             OnPlayerProfileChanged?.Invoke(this);
             return this; 
+        } 
+        public PlayerInfo SetCharacterPosition(List<PlayerCharacterPosition> characterPosition)
+        {
+            this.characterPosition = characterPosition;
+            return this;
         }
+
+        public PlayerCharacterPosition GetCharacterPosition(int position)
+        {
+            if(characterPosition.Find(x => x.position == position) == null)
+            {
+                var newCharacterPosition = new PlayerCharacterPosition { position = position };
+                characterPosition.Add(newCharacterPosition);
+                return newCharacterPosition;
+            }
+            return characterPosition.Find(x => x.position == position);
+        }
+    }
+
+    [System.Serializable]
+    public class PlayerCharacterPosition
+    {
+      [SerializeField] public int position;
+      [SerializeField] public int characterId;
+      
+      public void SetCharacterId(int id)
+      {
+          characterId = id;
+      }
     }
 }

@@ -30,7 +30,8 @@ namespace Script.Ui.MainMenu
         {
             MAIN_MENU = 0,
             CURRENCY_SHOP = 1,
-            CHARACTER_SHOP = 2
+            CHARACTER_SHOP = 2,
+            CHARACTER_INVENTORY = 3
         }
         public void SetCurrency(CurrencyInfo currency)
         {
@@ -67,6 +68,10 @@ namespace Script.Ui.MainMenu
                 case EMainMenuRoot.CHARACTER_SHOP:
                     foreach (var r in mainMenuRoot) 
                         r.Value.SetActive(r.Key == EMainMenuRoot.CHARACTER_SHOP); 
+                    break;
+                case EMainMenuRoot.CHARACTER_INVENTORY:
+                    foreach (var r in mainMenuRoot) 
+                        r.Value.SetActive(r.Key == EMainMenuRoot.CHARACTER_INVENTORY); 
                     break;
             }
         }

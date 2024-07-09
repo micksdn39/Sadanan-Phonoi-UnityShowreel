@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Script.Database.Shop;
 using Script.Enum;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,45 +12,51 @@ namespace Script.Service.Character
     {
         public List<Gashapon> gashaponList = new List<Gashapon>();
 
-        public Dictionary<GameEnum.ETier, int> gashaponTierRate = new Dictionary<GameEnum.ETier, int>();
+        public Dictionary<GameEnum.ETier, int> gashaponTierRateDefault = new Dictionary<GameEnum.ETier, int>();
 
         public GashaponData()
         {
+            gashaponTierRateDefault.Add(GameEnum.ETier.COMMON, 50);
+            gashaponTierRateDefault.Add(GameEnum.ETier.RARE, 30);
+            gashaponTierRateDefault.Add(GameEnum.ETier.EPIC, 15);
+            gashaponTierRateDefault.Add(GameEnum.ETier.LEGEND, 5);
+            
             var gashapon1 = new Gashapon(1)
-                { gashaName = "Gashapon 1" };
+                { gashaName = "Summer Gashapon" };
             gashapon1.AddCharacter(1, GameEnum.ETier.COMMON);
             gashapon1.AddCharacter(2, GameEnum.ETier.RARE);
             gashapon1.AddCharacter(5, GameEnum.ETier.EPIC);
             gashapon1.AddCharacter(9, GameEnum.ETier.LEGEND);
+            gashapon1.gashaponTierRate = gashaponTierRateDefault;
             gashaponList.Add(gashapon1);
             
-            var gashapon2 = new Gashapon(2)
-                { gashaName = "Gashapon 2" };
+            var gashapon2 = new Gashapon(2,GameEnum.ECurrency.GEM)
+                { gashaName = "Rate Up ! Legend x2" };
             gashapon2.AddCharacter(1, GameEnum.ETier.COMMON);
             gashapon2.AddCharacter(2, GameEnum.ETier.RARE);
             gashapon2.AddCharacter(5, GameEnum.ETier.EPIC);
             gashapon2.AddCharacter(9, GameEnum.ETier.LEGEND);
-            gashaponList.Add(gashapon2);
             
-            gashaponTierRate.Add(GameEnum.ETier.COMMON, 50);
-            gashaponTierRate.Add(GameEnum.ETier.RARE, 30);
-            gashaponTierRate.Add(GameEnum.ETier.EPIC, 15);
-            gashaponTierRate.Add(GameEnum.ETier.LEGEND, 5);
+            gashapon2.gashaponTierRate.Add(GameEnum.ETier.COMMON, 50);
+            gashapon2.gashaponTierRate.Add(GameEnum.ETier.RARE, 30);
+            gashapon2.gashaponTierRate.Add(GameEnum.ETier.EPIC, 15);
+            gashapon2.gashaponTierRate.Add(GameEnum.ETier.LEGEND, 10);
+            
+            gashaponList.Add(gashapon2);
         }
         
         public Gashapon GetGashapon(int gashaId)
         { 
-            Debug.Log(" gashaId: " + gashaId);
             return gashaponList.Find(x => x.gashaId == gashaId);
         }
 
         public int GetRandomGashapon(int gashaId)
         {
-            var tier = RandomTier();
-            
+            var tier = RandomTier((int)DateTime.Now.Ticks);
+            Debug.Log("You got " + tier);
             var gashapon = GetGashapon(gashaId);
             var characterForRandom = gashapon.GetCharacterByTier(tier);
-            Random.InitState((int)DateTime.Now.Ticks);
+         
             return characterForRandom[Random.Range(0, characterForRandom.Count)].characterId;
         }
         public List<int> GetCharacterList(int gashaId)
@@ -60,23 +67,27 @@ namespace Script.Service.Character
                 characterList.Add(GetRandomGashapon(gashaId));
             }
             return characterList;
+        } 
+        public CurrencyOptions GetGashaponPrice(int gashaId)
+        {
+            return gashaponList.Find(x => x.gashaId == gashaId).gashaPrice;
         }
 
-        GameEnum.ETier RandomTier()
+        GameEnum.ETier RandomTier(int seed)
         {
             int totalWeight = 0;
-            foreach (var tier in gashaponTierRate)
+            foreach (var tier in gashaponTierRateDefault)
             {
                 totalWeight += tier.Value;
             }
-
+            Random.InitState(seed); 
             int randomValue = Random.Range(0, totalWeight);
-           
-            if(randomValue <= gashaponTierRate[GameEnum.ETier.LEGEND])
+            
+            if(randomValue <= gashaponTierRateDefault[GameEnum.ETier.LEGEND])
                 return GameEnum.ETier.LEGEND;
-            if(randomValue <= gashaponTierRate[GameEnum.ETier.EPIC])
+            if(randomValue <= gashaponTierRateDefault[GameEnum.ETier.EPIC])
                 return GameEnum.ETier.EPIC;
-            if(randomValue <= gashaponTierRate[GameEnum.ETier.RARE])
+            if(randomValue <= gashaponTierRateDefault[GameEnum.ETier.RARE])
                 return GameEnum.ETier.RARE;
             return GameEnum.ETier.COMMON;
         }
@@ -87,11 +98,17 @@ namespace Script.Service.Character
         public string gashaName;
         public int gashaId;
         public List<CharacterGashapon> gashaponCharacter;
-
-        public Gashapon(int gashaId)
+        public CurrencyOptions gashaPrice;
+        public Dictionary<GameEnum.ETier, int> gashaponTierRate = new Dictionary<GameEnum.ETier, int>();
+        public Gashapon(int gashaId,GameEnum.ECurrency currencyType = GameEnum.ECurrency.GOLD)
         {
             this.gashaId = gashaId;
             gashaponCharacter = new List<CharacterGashapon>();
+            gashaPrice = new CurrencyOptions()
+            {
+                currencyType = currencyType,
+                amount = 100
+            };
         }
         public Gashapon AddCharacter(int characterId,GameEnum.ETier tier)
         {

@@ -15,7 +15,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: 22a835a3fd8e79545803f833b82233fb, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,12 +25,10 @@ MonoBehaviour:
     - Name: characterId
       Entry: 3
       Data: 9
-    - Name: characterName
-      Entry: 1
-      Data: Luna
     - Name: tier
       Entry: 3
       Data: 3
     - Name: characterIcon
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
+  <characterName>k__BackingField: 

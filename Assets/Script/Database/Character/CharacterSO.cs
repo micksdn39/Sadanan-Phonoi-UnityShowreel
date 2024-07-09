@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Script.Database.Character
 {
     [CreateAssetMenu(fileName = "CharacterDatabase", menuName = "ScriptableObjects/CharacterDatabase")]
-    public class CharacterSO : SerializedScriptableObject
+    public class CharacterSO : SerializedScriptableObject , BaseInfo
     {
         [SerializeField] public int characterId { get; private set; }
         [field: TextArea,SerializeField] public string characterName { get; private set; }
