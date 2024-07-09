@@ -8,7 +8,7 @@ namespace Script.Player
         [SerializeField] public float gold ;
         [SerializeField] public float gem ;
         public delegate void OnPlayerCurrencyEvent(CurrencyInfo currencyInfo); 
-        public OnPlayerCurrencyEvent OnPlayerCurrencyChanged;
+        [HideInInspector] public OnPlayerCurrencyEvent OnPlayerCurrencyChanged;
         public CurrencyInfo()
         {
             gold = 100;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Script.Database.Character;
 using Script.Game;
 using UnityEngine;
@@ -11,6 +12,8 @@ namespace Script.Character
         [SerializeField] private List<CharacterTeamTab> listOfTeamPosition;
         
         private CharacterSO currentInfo;
+        
+        public event Action<CharacterSO> OnAddTeamTab;
         private void OnEnable()
         {
             RefreshUi();
@@ -39,6 +42,7 @@ namespace Script.Character
                 {
                     listOfInfo.Add(GameInstance.GameDatabase.GetCharacter(character.characterId));
                 } 
+                listOfInfo = listOfInfo.OrderByDescending(ch => ch.characterId).ToList();
                 Success?.Invoke();
             });
 
@@ -54,6 +58,10 @@ namespace Script.Character
 
         protected override void InitTabCallback()
         {
+            foreach (var tab in listOfTabs)
+            {
+                OnAddTeamTab += tab.OnAddTeamClick;
+            }
         }
 
         protected override void Disable()
@@ -68,7 +76,7 @@ namespace Script.Character
             }
             currentInfo = info;
         }
-
+ 
         private void OnAddTeamClick(CharacterTeamTab info)
         {
             foreach (var team in listOfTeamPosition)
@@ -83,6 +91,8 @@ namespace Script.Character
             {
                 GameInstance.PlayerCtrl.SetPlayerInfo(result.player);
             }); 
+            
+            OnAddTeamTab?.Invoke(currentInfo);
         }
     }
 }

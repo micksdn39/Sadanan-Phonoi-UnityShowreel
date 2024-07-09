@@ -16,8 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 21300000, guid: 1b9bb45e5a49af14fa25912e0bcdb7a6, type: 3}
-    - {fileID: 21300000, guid: dd888855a4b7823438e87d4341242a52, type: 3}
+    - {fileID: 21300000, guid: b2517482e9f9b7949b12fc7ac185f776, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -30,8 +29,8 @@ MonoBehaviour:
       Entry: 6
       Data: 
     - Name: gashaponIcon
-      Entry: 10
-      Data: 0
+      Entry: 6
+      Data: 
     - Name: gashaponBanner
       Entry: 10
-      Data: 1
+      Data: 0

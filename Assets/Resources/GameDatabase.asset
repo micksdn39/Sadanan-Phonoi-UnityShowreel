@@ -27,10 +27,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a347cb36c421873418a4171996dcc87f, type: 2}
   - {fileID: 11400000, guid: d6ca7bd2bfa2a4e4fb6acdceab065bd1, type: 2}
   listOfCharacter:
-  - {fileID: 11400000, guid: 3403533b5f795d6488fed7e4fa9953ef, type: 2}
-  - {fileID: 11400000, guid: 0540420c0d7dcf24090d87ff503f4c14, type: 2}
-  - {fileID: 11400000, guid: 45aa272b71dddc7408c70baee4b0b6be, type: 2}
-  - {fileID: 11400000, guid: 6981fdf35c52fc145b009ce23bc3a157, type: 2}
+  - {fileID: 11400000, guid: 01629d93d5e53a549920abcf102f4a54, type: 2}
+  - {fileID: 11400000, guid: 61197ae83ae831840a33ea0d8b8f543e, type: 2}
+  - {fileID: 11400000, guid: d433e7717cf85b141884507487fc33fc, type: 2}
+  - {fileID: 11400000, guid: 07e322058cc35cb4c850abdf796b252f, type: 2}
+  - {fileID: 11400000, guid: 1569e605f26763948bcb6a99da6e5275, type: 2}
+  - {fileID: 11400000, guid: e526faa9ec95a1441b110cae9a00740c, type: 2}
+  - {fileID: 11400000, guid: cb8367eb61b722e49aa7284c4c2f3274, type: 2}
+  - {fileID: 11400000, guid: be0f7698503b6744584fb3d24f0833f2, type: 2}
   listOfCharacterShopSettings:
   - {fileID: 11400000, guid: 26ab688004c73964b8611d846e962582, type: 2}
   - {fileID: 11400000, guid: 83a85debc8205cf45b4ea4f49a1f224e, type: 2}

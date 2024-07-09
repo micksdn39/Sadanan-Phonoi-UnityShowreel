@@ -8,10 +8,11 @@ namespace Script
     public abstract class BaseTab<T> : SerializedMonoBehaviour where T : BaseInfo
     { 
         [SerializeField] private Image iconSelected;
-        [SerializeField,ReadOnly] protected T info { get; private set; }
+        [SerializeField,ReadOnly] public T info { get; private set; }
         public event Action OnDisableOtherTab;
         public event Action<T> OnClickTab;
-        
+
+        protected bool isLockClick = false;
         public void RefreshUi(T bInfo)
         { 
             info = bInfo; 
@@ -22,6 +23,7 @@ namespace Script
         
         public void ButtonClick()
         { 
+            if(isLockClick) return;
             OnDisableOtherTab?.Invoke();
             OnClickTab?.Invoke(info);
             

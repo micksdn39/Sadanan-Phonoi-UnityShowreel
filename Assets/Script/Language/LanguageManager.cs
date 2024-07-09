@@ -50,7 +50,14 @@ namespace Script.Language
                     return texts[key]; 
             }
             return defaultValue;
-        } 
-        public TMP_FontAsset GetFont => fonts[CurrentLanguageKey];  
+        }
+
+        public TMP_FontAsset GetFont()
+        {
+            if (fonts.ContainsKey(CurrentLanguageKey))
+                return fonts[CurrentLanguageKey];
+            ChangeLanguage(defaultLanguageKey);
+            return fonts[defaultLanguageKey];
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Script.Database;
 using Script.Language;
 using Script.Player;
@@ -23,6 +24,7 @@ namespace Script.Game
         public PlayerCtrl playerCtrl;
         public static PlayerCtrl PlayerCtrl { get; private set; }
 
+        public static event Action OnInitializedCompleted;
         private void Awake()
         {
             if (Singleton != null)
@@ -39,6 +41,7 @@ namespace Script.Game
             GameService = gameService;
             LanguageManager = languageManager;
             PlayerCtrl = playerCtrl;
+            OnInitializedCompleted?.Invoke();
         }
 
     }

@@ -14,6 +14,7 @@ namespace Script.Language
         private Image image;
         private void Start()
         {
+            if(!GameInstance.IsInitialized) return;
             image = this.GetComponent<Image>();
             SetImage();
         }
