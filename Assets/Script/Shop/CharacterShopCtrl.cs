@@ -52,7 +52,7 @@ namespace Script.Shop
         }
         public void OnButtonClick_TenTicket()
         {
-            GameInstance.GameService.GashaponRandomList(currentGashaponId, result =>
+            GameInstance.GameService.GetGashaponRandomList(currentGashaponId, result =>
             {
                 foreach (var r in result.characterListId)
                 {

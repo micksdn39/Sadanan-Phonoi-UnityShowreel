@@ -1,4 +1,6 @@
 using System;
+using Script.DialogBox;
+using Script.Language;
 using Script.Ui.MainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +9,7 @@ namespace Script.Game
 {
     public class GameMainMenu : MonoBehaviour
     {
+        [SerializeField] private string loadSceneName;  
         [SerializeField] private PanelMainMenu panelMainMenu;
         private void Start()
         {
@@ -33,6 +36,16 @@ namespace Script.Game
         {
             panelMainMenu.SetCurrency(GameInstance.PlayerCtrl.playerInfo.currencyInfo);
             GameInstance.PlayerCtrl.playerInfo.currencyInfo.OnPlayerCurrencyChanged += panelMainMenu.SetCurrency; 
+        }
+        
+        public void OnButtonClick_Logout()
+        {
+            GameInstance.GameService.LogoutAnonymous();
+            Dialog.BasicMessageOK(GameInstance.LanguageManager.GetText(GameText.TITLE_LOGOUT),
+                result =>
+                {
+                    SceneManager.LoadScene(loadSceneName);
+                });
         }
     }
 }

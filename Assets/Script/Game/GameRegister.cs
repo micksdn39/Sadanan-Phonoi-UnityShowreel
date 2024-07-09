@@ -70,23 +70,26 @@ namespace Script.Game
             GameInstance.GameService.RegisterAnonymous(
                 new PlayerInfo()
                     .SetPlayerName(name)
-                    .SetProfileId(profileId));
-              
-            string registerSuccess = GameInstance.LanguageManager.GetText(GameText.TITLE_REGISTER_SUCCESS);
-            string buttonOk = GameInstance.LanguageManager.GetText(GameText.TITLE_BUTTON_OK);
-            BasicMessageBox.Show(
-                new BasicMessageBoxInfo(registerSuccess, 
-                new ButtonEntryInfo(buttonOk, DialogResult.OK)), 
-                Callback);
+                    .SetProfileId(profileId),
+                result =>
+                {  
+                    result.BasicMessageErrorService(success:() =>
+                    {
+                        
+                        string registerSuccess = GameInstance.LanguageManager.GetText(GameText.TITLE_REGISTER_SUCCESS);
+                        Dialog.BasicMessageOK(registerSuccess, Callback);
             
-            void Callback(DialogResult result)
-            {
-                if (result == DialogResult.OK)
-                { 
-                    OnRegisterSuccess?.Invoke();
-                    SetActiveRoot(ERegisterRoot.NONE);
-                }
-            }
+                        void Callback(DialogResult result)
+                        {
+                            if (result == DialogResult.OK)
+                            { 
+                                OnRegisterSuccess?.Invoke();
+                                SetActiveRoot(ERegisterRoot.NONE);
+                            }
+                        } 
+                    },
+                        error: () => SetActiveRoot(ERegisterRoot.ENTER_NAME));
+                }); 
         }
         private void SetActiveRoot(ERegisterRoot root)
         {

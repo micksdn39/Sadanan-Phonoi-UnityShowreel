@@ -1,6 +1,7 @@
 using System;
 using Script.Game;
-using Script.Language; 
+using Script.Language;
+using Script.Service;
 
 namespace Script.DialogBox
 {
@@ -32,6 +33,25 @@ namespace Script.DialogBox
                     new ButtonEntryInfo(buttonOK,DialogResult.OK)),
                     callback);
              
+        }
+        public static void BasicMessageErrorService(this GameServiceResult service,Action success=null,Action error=null)
+        {
+            if(service.Success)
+            {
+                success?.Invoke();
+                return;
+            }
+            string buttonOK = GameInstance.LanguageManager.GetText(GameText.TITLE_BUTTON_OK);
+
+            BasicMessageBox.Show(
+                new BasicMessageBoxInfo(
+                    service.error,
+                    new ButtonEntryInfo(buttonOK, DialogResult.OK)),
+                result =>
+                {
+                    error?.Invoke();
+                });
+
         }
     }
 }

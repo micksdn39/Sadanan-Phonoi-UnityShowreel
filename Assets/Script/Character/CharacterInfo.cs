@@ -3,11 +3,11 @@ using UnityEngine;
 
 [System.Serializable]
 public class CharacterInfo
-{ 
-    [SerializeField] public int characterId { get; private set; }
-    [SerializeField] public int level { get; private set; }
-    [SerializeField] public int exp { get; private set; }
-    [SerializeField] public int statusPoint { get; private set; } 
+{
+    [SerializeField] public int characterId;
+    [SerializeField] public int level;
+    [SerializeField] public int exp;
+    [SerializeField] public int statusPoint;
 
     CharacterInfo(){ }
     public CharacterInfo Clone()

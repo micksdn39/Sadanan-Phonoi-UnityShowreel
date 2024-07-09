@@ -16,19 +16,62 @@ namespace Script.Service
         private PlayerInfo playerData;
         private void SavePlayerData()
         {
-            ClientSave.Save(SaveKey.PlayerInfo,playerData);
+            ClientSave.Save(SaveKey.PlayerInfo+GetCurrentAccount(),playerData);
+        } 
+        private PlayerInfo GetPlayerData()
+        { 
+            return ClientSave.Load<PlayerInfo>(SaveKey.PlayerInfo+GetCurrentAccount());
         }
-        public void RegisterAnonymous(PlayerInfo player)
+        private PlayerInfo GetPlayerData(string name)
+        { 
+            return ClientSave.Load<PlayerInfo>(SaveKey.PlayerInfo+name);
+        }
+        private string GetCurrentAccount()
+        { 
+            return ClientSave.Load(SaveKey.CurrentAccount,"");
+        } 
+        public void RegisterAnonymous(PlayerInfo player,Action<RegisterResult> onFinish)
         {
-            ClientSave.Save(SaveKey.PlayerInfo,player);
+            if(GetPlayerData(player.playerName) != default)
+            {
+                onFinish(new RegisterResult() { error = GameServiceErrorCode.ACCOUNT_EXIST });
+                return;
+            }
+            ClientSave.Save(SaveKey.CurrentAccount,player.playerName);
+            ClientSave.Save(SaveKey.PlayerInfo+player.playerName,player);
+            onFinish(new RegisterResult());
         } 
         public void LoginAnonymous(Action<PlayerInfoResult> onFinish)
         {
-            playerData = ClientSave.Load<PlayerInfo>(SaveKey.PlayerInfo);
+            if (GetCurrentAccount() == default)
+            {
+                onFinish(new PlayerInfoResult { error = GameServiceErrorCode.ACCOUNT_NOT_EXIST });
+                return;
+            } 
+            playerData = GetPlayerData();
             onFinish(new PlayerInfoResult { player = playerData.Clone() });   
             
             SavePlayerData();
-        }  
+        }
+        public void LoginAnonymous(string name,Action<PlayerInfoResult> onFinish)
+        {
+            if (GetPlayerData(name) == default)
+            {
+                onFinish(new PlayerInfoResult { error = GameServiceErrorCode.ACCOUNT_NOT_EXIST });
+                return;
+            } 
+            ClientSave.Save(SaveKey.CurrentAccount,name);
+
+            playerData = GetPlayerData();
+            onFinish(new PlayerInfoResult { player = playerData.Clone() });   
+            
+            SavePlayerData();
+        }
+
+        public void LogoutAnonymous()
+        {
+            ClientSave.Delete(SaveKey.CurrentAccount);
+        }
         public void PurchaseVirtualCurrency(CurrencyShopSO currencyShop,Action<PlayerInfoResult> onFinish)
         {
             if (currencyShop.CurrencyPurchase.amount != 0)
@@ -67,23 +110,27 @@ namespace Script.Service
             SavePlayerData();
         }
 
+        #region Gashapon 
         public void GetGashaponList(Action<GashaponResult> onFinish)
         {
             GashaponData gashaponData = new GashaponData();
             onFinish(new GashaponResult { gashaponList = gashaponData.gashaponList });
         }
-        public void GashaponRandom(int gashaId,Action<CharacterResult> onFinish)
-        {
-            GashaponData gashaponData = new GashaponData();
-            var gashapon = gashaponData.GetRandomGashapon(gashaId);
-            playerData.AddCharacter(gashapon);
-            onFinish(new CharacterResult { characterId = gashapon }); 
-        }
-        public void GashaponRandomList(int gashaId,Action<CharacterListResult> onFinish)
+        public void GetGashaponRandomList(int gashaId,Action<CharacterListResult> onFinish)
         {
             GashaponData gashaponData = new GashaponData();
             var characterList = gashaponData.GetCharacterList(gashaId);
             onFinish(new CharacterListResult { characterListId = characterList });
-        }
+        } 
+        public void GashaponRandom(int gashaId,Action<CharacterResult> onFinish)
+        {
+            GashaponData gashaponData = new GashaponData();
+            var gashapon = gashaponData.GetRandomGashapon(gashaId);
+            playerData.AddCharacter(gashapon); 
+            onFinish(new CharacterResult { characterId = gashapon }); 
+            
+            SavePlayerData();
+        } 
+        #endregion
     }
 }

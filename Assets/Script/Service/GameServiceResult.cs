@@ -11,6 +11,8 @@ namespace Script.Service
         public const string UNKNOW = ERROR_PREFIX + "UNKNOW";
         public const string NETWORK = ERROR_PREFIX + "NETWORK";
         public const string PlAYER_CURRENCY_NOT_ENOUGH = ERROR_PREFIX + "PLAYER_CURRENCY_NOT_ENOUGH";
+        public const string ACCOUNT_NOT_EXIST = ERROR_PREFIX + "ACCOUNT_NOT_EXIST";
+        public const string ACCOUNT_EXIST = ERROR_PREFIX + "ACCOUNT_EXIST";
     }
     [System.Serializable]
     public class GameServiceResult
@@ -22,6 +24,10 @@ namespace Script.Service
     public class PlayerInfoResult : GameServiceResult
     {
         public PlayerInfo player;
+    }
+    [System.Serializable]
+    public class RegisterResult : GameServiceResult
+    { 
     }
     [System.Serializable]
     public class CharacterResult : GameServiceResult
