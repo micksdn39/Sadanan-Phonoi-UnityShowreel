@@ -1,5 +1,6 @@
 using System;
 using Script.Database.Character;
+using Script.Game;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +19,8 @@ namespace Script.Character
         public void SetInfo(CharacterSO characterSo)
         {
             info = characterSo;
-            characterIcon.sprite = info.characterIcon;
+            characterIcon.sprite = info.characterIcon; 
+            SetAvailable(false);
         }  
         public int Position
         {

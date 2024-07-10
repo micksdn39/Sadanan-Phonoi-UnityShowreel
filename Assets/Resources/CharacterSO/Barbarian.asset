@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: c8c78447d4cc2e24caa61b3ecec175a7, type: 3}
+    - {fileID: 542841483384324429, guid: e036f1f2e37d51a4caa18cff616ce1a5, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,5 +32,8 @@ MonoBehaviour:
     - Name: characterIcon
       Entry: 10
       Data: 0
+    - Name: characterPrefab
+      Entry: 10
+      Data: 1
   guid: 01629d93d5e53a549920abcf102f4a54
   <characterName>k__BackingField: Barbarian

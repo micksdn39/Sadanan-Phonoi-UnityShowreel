@@ -6050,6 +6050,7 @@ GameObject:
   - component: {fileID: 1305292966}
   - component: {fileID: 1305292965}
   - component: {fileID: 1305292967}
+  - component: {fileID: 1305292969}
   - component: {fileID: 1305292968}
   m_Layer: 0
   m_Name: (script) GameInstance
@@ -6074,6 +6075,7 @@ MonoBehaviour:
   gameService: {fileID: 1305292967}
   languageManager: {fileID: 11400000, guid: 82263d39e809f4a43beb32e7cbc2ce73, type: 2}
   playerCtrl: {fileID: 1305292968}
+  helpers: {fileID: 1305292969}
 --- !u!4 &1305292966
 Transform:
   m_ObjectHideFlags: 0
@@ -6152,12 +6154,30 @@ MonoBehaviour:
     - Name: characterPosition
       Entry: 6
       Data: 
+    - Name: positionOfCharacter
+      Entry: 6
+      Data: 
+    - Name: OnPlayerCharacterChanged
+      Entry: 6
+      Data: 
     - Name: OnPlayerProfileChanged
       Entry: 6
       Data: 
     - Name: 
       Entry: 8
       Data: 
+--- !u!114 &1305292969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305292964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9938b2966997c429bd97a7254f9eae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1344932634
 GameObject:
   m_ObjectHideFlags: 0

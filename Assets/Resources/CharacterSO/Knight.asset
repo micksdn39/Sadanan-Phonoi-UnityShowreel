@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 0fd4da9eb8374b945b48460db1857587, type: 3}
+    - {fileID: 7838699219594082360, guid: 33dd3f3943f564d47ae43e06a792ea93, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,5 +32,8 @@ MonoBehaviour:
     - Name: characterIcon
       Entry: 10
       Data: 0
+    - Name: characterPrefab
+      Entry: 10
+      Data: 1
   guid: 61197ae83ae831840a33ea0d8b8f543e
   <characterName>k__BackingField: Knight

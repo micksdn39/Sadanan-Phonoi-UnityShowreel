@@ -16,11 +16,18 @@ namespace Script.Database.Character
         
         [PreviewField(100, ObjectFieldAlignment.Left), SerializeField]
         public Sprite characterIcon { get; private set; }
+        [PreviewField(100, ObjectFieldAlignment.Left), SerializeField]
+        public GameObject characterPrefab { get; private set; }
         
         void OnValidate()
         {
             var path = AssetDatabase.GetAssetPath(this);
             guid = AssetDatabase.AssetPathToGUID(path);
+        }
+        
+        public GameObject InstantiatePrefab(Transform parent)
+        { 
+           return GameObject.Instantiate(characterPrefab, parent);
         }
     }
 }

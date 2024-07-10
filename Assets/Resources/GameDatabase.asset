@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096467177625a0a4da4da863004d48a9, type: 3}
   m_Name: GameDatabase
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   listOfProfileData:
   - {fileID: 11400000, guid: 0425e029227e1fb4789be2baee1153b3, type: 2}
   - {fileID: 11400000, guid: c676756177a51444b995267a1fa957f5, type: 2}

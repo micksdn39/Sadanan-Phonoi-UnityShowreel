@@ -36,7 +36,7 @@ namespace Script.Character
         {
             GameInstance.GameService.GetUpdatePlayerInfo(result =>
             {
-                GameInstance.PlayerCtrl.SetPlayerInfo(result.player);
+                GameInstance.PlayerCtrl.UpdatePlayerCharacter(result.player);
                 listOfInfo = new List<CharacterSO>();
                 foreach (var character in result.player.characterInfo)
                 {
@@ -89,7 +89,7 @@ namespace Script.Character
             GameInstance.GameService.UpdatePlayerCharacterPosition(info.Position,currentInfo.characterId, 
                 result =>
             {
-                GameInstance.PlayerCtrl.SetPlayerInfo(result.player);
+                GameInstance.PlayerCtrl.playerInfo.SetCharacterPosition(result.player.characterPosition);
             }); 
             
             OnAddTeamTab?.Invoke(currentInfo);

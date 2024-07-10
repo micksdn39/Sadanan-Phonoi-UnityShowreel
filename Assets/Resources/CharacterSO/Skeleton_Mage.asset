@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 4379f19897ad9904196e5b5617065c13, type: 3}
+    - {fileID: 3850369602377163372, guid: cc2e4e831ce18ad4e9c7eb358ef9743e, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,5 +32,8 @@ MonoBehaviour:
     - Name: characterIcon
       Entry: 10
       Data: 0
+    - Name: characterPrefab
+      Entry: 10
+      Data: 1
   guid: cb8367eb61b722e49aa7284c4c2f3274
   <characterName>k__BackingField: Skeleton Mage

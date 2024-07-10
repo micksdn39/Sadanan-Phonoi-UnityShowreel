@@ -29,13 +29,13 @@ namespace Script.Shop
                 if (result == DialogResult.Yes)
                 { 
                    GameInstance.GameService.PurchaseVirtualCurrency(
-                       info,result =>
+                       info,finish =>
                        {
-                           if(result.Success)
-                               GameInstance.PlayerCtrl.SetPlayerInfo(result.player);
+                           if(finish.Success)
+                               GameInstance.PlayerCtrl.UpdatePlayerCurrency(finish.player);
                            else
                            {
-                               Dialog.BasicMessageOK(result.error,null);
+                               Dialog.BasicMessageOK(finish.error,null);
                            }
                        });
                 } 

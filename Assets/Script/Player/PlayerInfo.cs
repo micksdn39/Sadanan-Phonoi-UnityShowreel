@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Script.Database.Character;
+using Script.Game;
 using UnityEngine;
 
 namespace Script.Player
@@ -12,7 +14,11 @@ namespace Script.Player
         [SerializeField] public CurrencyInfo currencyInfo ; 
         [SerializeField] public List<CharacterInfo> characterInfo ; 
         [SerializeField] public List<PlayerCharacterPosition> characterPosition;
-
+        
+        [SerializeField] Dictionary<int, GameObject> positionOfCharacter = new Dictionary<int, GameObject>(); 
+        public delegate void OnPlayerCharacterEvent(CharacterSO character,int position,
+            Action<int, GameObject> callback); 
+        [HideInInspector] public OnPlayerCharacterEvent OnPlayerCharacterChanged;
         public delegate void OnPlayerProfileEvent(PlayerInfo playerInfo); 
         [HideInInspector] public OnPlayerProfileEvent OnPlayerProfileChanged;
         public PlayerInfo()
@@ -51,11 +57,40 @@ namespace Script.Player
             return this; 
         } 
         public PlayerInfo SetCharacterPosition(List<PlayerCharacterPosition> characterPosition)
-        {
+        { 
+            foreach (var ch in positionOfCharacter)
+            {
+                GameInstance.Helpers.DoDestroy(ch.Value);
+            }
+            positionOfCharacter.Clear();
+            
+            foreach (var character in characterPosition)
+            {
+                var characterSO = GameInstance.GameDatabase.GetCharacter(character.characterId);
+                OnPlayerCharacterChanged?.Invoke(characterSO,character.position,(i, g) =>
+                {
+                    positionOfCharacter.Add(i, g);
+                }); 
+            }
             this.characterPosition = characterPosition;
             return this;
         }
 
+        public void UpdateCharacterPrefab(Dictionary<int, Transform> dicOfCharacterPosition)
+        { 
+            foreach (var ch in positionOfCharacter)
+            {
+                GameInstance.Helpers.DoDestroy(ch.Value);
+            }
+            positionOfCharacter.Clear();
+            
+            foreach (var character in characterPosition)
+            {
+                var characterSO = GameInstance.GameDatabase.GetCharacter(character.characterId);
+                var prefab = characterSO.InstantiatePrefab(dicOfCharacterPosition[character.position]); 
+                positionOfCharacter.Add(character.position, prefab);
+            }
+        }
         public PlayerCharacterPosition GetCharacterPosition(int position)
         {
             if(characterPosition.Find(x => x.position == position) == null)
@@ -72,11 +107,11 @@ namespace Script.Player
     public class PlayerCharacterPosition
     {
       [SerializeField] public int position;
-      [SerializeField] public int characterId;
+      [SerializeField] public int characterId; 
       
       public void SetCharacterId(int id)
       {
           characterId = id;
-      }
-    }
+      }  
+    } 
 }

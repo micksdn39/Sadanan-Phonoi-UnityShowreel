@@ -23,7 +23,8 @@ namespace Script.Game
 
         public PlayerCtrl playerCtrl;
         public static PlayerCtrl PlayerCtrl { get; private set; }
-
+        public Helpers helpers;
+        public static Helpers Helpers { get; private set; }
         public static event Action OnInitializedCompleted;
         private void Awake()
         {
@@ -41,6 +42,7 @@ namespace Script.Game
             GameService = gameService;
             LanguageManager = languageManager;
             PlayerCtrl = playerCtrl;
+            Helpers = helpers;
             OnInitializedCompleted?.Invoke();
         }
 

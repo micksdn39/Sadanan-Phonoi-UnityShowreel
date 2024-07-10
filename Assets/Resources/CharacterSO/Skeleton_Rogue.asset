@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 21300000, guid: 2ea9c4b676368b84b9e8cf002493d205, type: 3}
+    - {fileID: 7546577526593788309, guid: d9fc888c2e2de404199e970897f4a3bb, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -31,5 +32,8 @@ MonoBehaviour:
     - Name: characterIcon
       Entry: 10
       Data: 0
+    - Name: characterPrefab
+      Entry: 10
+      Data: 1
   guid: be0f7698503b6744584fb3d24f0833f2
   <characterName>k__BackingField: Skeleton Rogue

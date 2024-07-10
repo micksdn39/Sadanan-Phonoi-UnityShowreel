@@ -8,9 +8,18 @@ namespace Script.Player
     {
        [OdinSerialize,ReadOnly] public PlayerInfo playerInfo { get; private set; }
        
-       public void SetPlayerInfo(PlayerInfo playerInfo)
+       public void SetPlayerInfo(PlayerInfo info)
        {
-           this.playerInfo = playerInfo.Clone();
+           this.playerInfo = info.Clone();
        } 
+       public void UpdatePlayerCurrency(PlayerInfo info)
+       {
+           playerInfo.currencyInfo = info.Clone().currencyInfo;
+       }
+       public void UpdatePlayerCharacter(PlayerInfo info)
+       {
+           playerInfo.characterInfo = info.Clone().characterInfo;
+           playerInfo.characterPosition = info.Clone().characterPosition;
+       }
     }
 }

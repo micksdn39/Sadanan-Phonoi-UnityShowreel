@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Script.Database
 {
     [CreateAssetMenu(fileName = "GameDatabase", menuName = "ScriptableObjects/GameDatabase")]
-    public class GameDatabase : ScriptableObject
+    public class GameDatabase : SerializedScriptableObject
     {
         [Title("ProfileDatabase")]
         public List<ProfileDataSO> listOfProfileData;
@@ -22,7 +22,7 @@ namespace Script.Database
         
         [Title("CharacterShopSettingsDatabase")]
         public List<CharacterShopSettingSO> listOfCharacterShopSettings;
-
+        
         public ProfileDataSO GetProfileData(int id)
         {
             return listOfProfileData.Find(x => x.profileId == id);
