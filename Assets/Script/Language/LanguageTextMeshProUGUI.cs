@@ -14,8 +14,7 @@ namespace Script.Language
         [HideIf("isGetFontOnly")]
         [SerializeField] private string key; 
 
-        private TextMeshProUGUI _text;
-
+        private TextMeshProUGUI _text; 
         private void Awake()
         {
             _text = GetComponent<TextMeshProUGUI>();
@@ -32,7 +31,8 @@ namespace Script.Language
             GameInstance.LanguageManager.OnLanguageChanged += SetText; 
         }  
         private void OnDestroy()
-        { 
+        {
+            if (!GameInstance.IsInitialized) return;
             GameInstance.LanguageManager.OnLanguageChanged -= SetText; 
         } 
         private void SetText()

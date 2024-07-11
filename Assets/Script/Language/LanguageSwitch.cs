@@ -17,18 +17,13 @@ namespace Script.Language
         private void Awake()
         {
             _image = this.GetComponent<Image>();
-        }
-
+        } 
         private void Start()
         {
-            if(!GameInstance.IsInitialized)
-            {
-                GameInstance.OnInitializedCompleted += Start;
-                return;
-            } 
+            if(!GameInstance.IsInitialized)  
+                return; 
             SetImage();
-        }
-
+        } 
         private void SetImage()
         {
             if (languageSprites.ContainsKey(GetLanguageKey()))
@@ -40,8 +35,7 @@ namespace Script.Language
         { 
             GameInstance.LanguageManager.ChangeLanguage(GetLanguageKey()); 
             SetImage();
-        }
-
+        } 
         private string GetLanguageKey()
         {
             string key = "";
