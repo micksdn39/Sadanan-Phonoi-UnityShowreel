@@ -11,8 +11,7 @@ using UnityEngine.UI;
 namespace Script.Ui.MainMenu
 {
     public class PanelMainMenu : SerializedMonoBehaviour
-    {
-        [Title("Panel Root")] 
+    { 
         [SerializeField] private Dictionary<EMainMenuRoot,GameObject> mainMenuRoot; 
         [Title("Profile")]
         [SerializeField] private Image profileImage;
@@ -24,8 +23,7 @@ namespace Script.Ui.MainMenu
         private void Start()
         {
             SetActiveRoot(EMainMenuRoot.MAIN_MENU);
-        }
-
+        } 
         enum EMainMenuRoot
         {
             MAIN_MENU = 0,
@@ -51,8 +49,7 @@ namespace Script.Ui.MainMenu
         public void CloseMenu()
         {
             SetActiveRoot(EMainMenuRoot.MAIN_MENU);
-        }
-        
+        } 
         private void SetActiveRoot(EMainMenuRoot root)
         {
             foreach (var r in mainMenuRoot) 

@@ -71,6 +71,13 @@ namespace Script.Game
         }
         public void OnButtonClick_ConfirmRegister()
         {
+            if (_profileId == 0)
+            {
+                string pleaseSelectedProfile = GameInstance.LanguageManager.GetText(GameText.TITLE_PLEASE_SELECTED_PRIFILE);
+
+                Dialog.BasicMessageOK(pleaseSelectedProfile, null);
+                return;
+            }
             GameInstance.GameService.RegisterAnonymous(
                 new PlayerInfo()
                     .SetPlayerName(_name)

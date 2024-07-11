@@ -1,11 +1,10 @@
-using Script.Database.Character;
 using Script.Game;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Script.Character
 {
-    public class CharacterInventoryTab : BaseTab<CharacterSO>
+    public class CharacterInventoryTab : BaseTab<CharacterInfo>
     {
         [SerializeField] public Image characterIcon;
         [SerializeField] public Image selectedIcon;
@@ -18,19 +17,16 @@ namespace Script.Character
 
         void CheckPosition()
         {
-            foreach (var characterPosition in GameInstance.PlayerCtrl.playerInfo.characterPosition)
-            {
-                if(GameInstance.GameDatabase.GetCharacter(characterPosition.characterId).Guid == info.Guid)
-                {
-                    MarkAsSelected(true);
-                    return;
-                }
-            }
+            if (!GameInstance.PlayerCtrl.playerInfo.IsPositionAvailable(info.characterId))
+            { 
+                MarkAsSelected(true);
+                return;
+            } 
             MarkAsSelected(false);
         }
-        public void OnAddTeamClick(CharacterSO info)
+        public void OnAddTeamClick(CharacterInfo info)
         {
-            if(info.Guid == this.info.Guid)
+            if(info.characterId == this.info.characterId)
             {
                 MarkAsSelected(true);
             }else
@@ -40,7 +36,8 @@ namespace Script.Character
         }
         protected override void InitUi()
         {
-            characterIcon.sprite = info.characterIcon;
+            var characterSprite = GameInstance.GameDatabase.GetCharacter(info.characterId).characterIcon;
+            characterIcon.sprite = characterSprite;
             selectedIcon.gameObject.SetActive(false);
 
             CheckPosition();

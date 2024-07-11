@@ -37,6 +37,7 @@ namespace Script.Language
         public const string TITLE_CHARACTER = TEXT_PREFIX + "TITLE_CHARACTER";
         public const string TITLE_SHOP = TEXT_PREFIX + "TITLE_SHOP";
         public const string TITLE_DUNGEON = TEXT_PREFIX + "TITLE_DUNGEON"; 
+        public const string TITLE_PLEASE_SELECTED_PRIFILE = TEXT_PREFIX + "TITLE_PLEASE_SELECTED_PRIFILE";
         
         public const string TITLE_BUTTON_OK = TEXT_PREFIX + "TITLE_BUTTON_OK";
         public const string TITLE_BUTTON_YES = TEXT_PREFIX + "TITLE_BUTTON_YES";
@@ -98,6 +99,7 @@ namespace Script.Language
             engTexts.Add(GameText.TITLE_CHARACTER, "Character");
             engTexts.Add(GameText.TITLE_SHOP, "Shop");
             engTexts.Add(GameText.TITLE_DUNGEON, "Dungeon");
+            engTexts.Add(GameText.TITLE_PLEASE_SELECTED_PRIFILE, "Please Select Profile");
             Languages.Add(ELanguage.ENG, engTexts);
 
             Dictionary<string, string> thTexts = new Dictionary<string, string>();
@@ -135,6 +137,7 @@ namespace Script.Language
             thTexts.Add(GameText.TITLE_CHARACTER, "ตัวละคร");
             thTexts.Add(GameText.TITLE_SHOP, "ร้านค้า");
             thTexts.Add(GameText.TITLE_DUNGEON, "ดันเจี้ยน");
+            thTexts.Add(GameText.TITLE_PLEASE_SELECTED_PRIFILE, "กรุณาเลือกโปรไฟล์");
             
             Languages.Add(ELanguage.TH, thTexts);
 

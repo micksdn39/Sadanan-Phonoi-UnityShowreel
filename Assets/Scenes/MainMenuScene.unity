@@ -6728,6 +6728,26 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: dictionaryOfCharacterPrefab
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[System.Int32, mscorlib],[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.GenericEqualityComparer`1[[System.Int32,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   loadSceneName: LoginScene
   panelMainMenu: {fileID: 573919033}
 --- !u!1 &1167986722
@@ -11632,7 +11652,28 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: info
+      Entry: 7
+      Data: 0|Script.Character.CharacterInfo, Assembly-CSharp
+    - Name: guid
       Entry: 6
+      Data: 
+    - Name: characterId
+      Entry: 3
+      Data: 0
+    - Name: level
+      Entry: 3
+      Data: 0
+    - Name: exp
+      Entry: 3
+      Data: 0
+    - Name: statusPoint
+      Entry: 3
+      Data: 0
+    - Name: position
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
   iconSelected: {fileID: 0}
   characterIcon: {fileID: 2019649270}

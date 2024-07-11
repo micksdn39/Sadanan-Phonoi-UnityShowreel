@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
-using Sirenix.Serialization;
-using UnityEngine;
+using Sirenix.Serialization; 
 
 namespace Script.Player
 {
@@ -19,7 +18,7 @@ namespace Script.Player
        public void UpdatePlayerCharacter(PlayerInfo info)
        {
            playerInfo.characterInfo = info.Clone().characterInfo;
-           playerInfo.characterPosition = info.Clone().characterPosition;
+           playerInfo.OnCharacterChanged?.Invoke();
        }
     }
 }

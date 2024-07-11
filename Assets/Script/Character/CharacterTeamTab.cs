@@ -1,5 +1,4 @@
-using System;
-using Script.Database.Character;
+using System; 
 using Script.Game;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,35 +8,31 @@ namespace Script.Character
     public class CharacterTeamTab : MonoBehaviour
     {
         [SerializeField] private int positionNumber;
+        [Space]
         [SerializeField] private Image characterIcon;
-        [SerializeField] private Image availableIcon;
-
+        [SerializeField] private Image availableIcon; 
         public event Action<CharacterTeamTab> OnButtonClickEvent;
-        private bool isAvailable;
-
-        private CharacterSO info;
-        public void SetInfo(CharacterSO characterSo)
+        
+        private bool _isAvailable; 
+        private CharacterInfo _info;
+        public void SetInfo(CharacterInfo info)
         {
-            info = characterSo;
-            characterIcon.sprite = info.characterIcon; 
+            _info = info;
+            var chSO = GameInstance.GameDatabase.GetCharacter(_info.characterId);
+            characterIcon.sprite = chSO.characterIcon; 
+            
             SetAvailable(false);
         }  
-        public int Position
-        {
-            get
-            {
-                return positionNumber;
-            }
-        }
+        public int Position => positionNumber;
 
         public void SetAvailable(bool active)
         {
-            isAvailable = active;
+            _isAvailable = active;
             availableIcon.gameObject.SetActive(active);
         }
         public void OnButtonClick()
         {
-            if(!isAvailable)return;
+            if(!_isAvailable)return;
             OnButtonClickEvent?.Invoke(this);
         }
     }

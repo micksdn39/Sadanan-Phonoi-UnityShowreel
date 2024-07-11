@@ -7,13 +7,12 @@ using UnityEngine;
 
 namespace Script.Character
 {
-    public class CharacterInventoryCtrl : BaseCtrl<CharacterInventoryTab, CharacterSO>
+    public class CharacterInventoryCtrl : BaseCtrl<CharacterInventoryTab, CharacterInfo>
     {
         [SerializeField] private List<CharacterTeamTab> listOfTeamPosition;
         
-        private CharacterSO currentInfo;
-        
-        public event Action<CharacterSO> OnAddTeamTab;
+        private CharacterInfo _currentInfo; 
+        public event Action<CharacterInfo> OnAddTeamTab;
         private void OnEnable()
         {
             RefreshUi();
@@ -37,23 +36,23 @@ namespace Script.Character
             GameInstance.GameService.GetUpdatePlayerInfo(result =>
             {
                 GameInstance.PlayerCtrl.UpdatePlayerCharacter(result.player);
-                listOfInfo = new List<CharacterSO>();
+                listOfInfo = new List<CharacterInfo>();
                 foreach (var character in result.player.characterInfo)
                 {
-                    listOfInfo.Add(GameInstance.GameDatabase.GetCharacter(character.characterId));
+                    listOfInfo.Add(character);
                 } 
                 listOfInfo = listOfInfo.OrderByDescending(ch => ch.characterId).ToList();
                 Success?.Invoke();
             });
 
-            foreach (var characterPosition in GameInstance.PlayerCtrl.playerInfo.characterPosition)
+            foreach (var tab in listOfTeamPosition)
             {
-                var chPosition = listOfTeamPosition.Find(x => x.Position == characterPosition.position);
-                if(chPosition != null);
+                var character = GameInstance.PlayerCtrl.playerInfo.GetCharacterByPosition(tab.Position);
+                if (character != null)
                 {
-                    chPosition.SetInfo(GameInstance.GameDatabase.GetCharacter(characterPosition.characterId));
+                    tab.SetInfo(character);
                 }
-            }
+            } 
         }
 
         protected override void InitTabCallback()
@@ -68,15 +67,14 @@ namespace Script.Character
         {
         }
 
-        protected override void OnClickTab(CharacterSO info)
+        protected override void OnClickTab(CharacterInfo info)
         {
             foreach (var team in listOfTeamPosition)
             {
                 team.SetAvailable(true);
             }
-            currentInfo = info;
-        }
- 
+            _currentInfo = info;
+        } 
         private void OnAddTeamClick(CharacterTeamTab info)
         {
             foreach (var team in listOfTeamPosition)
@@ -84,15 +82,15 @@ namespace Script.Character
                 team.SetAvailable(false);
             }
             
-            info.SetInfo(currentInfo);
+            info.SetInfo(_currentInfo);
 
-            GameInstance.GameService.UpdatePlayerCharacterPosition(info.Position,currentInfo.characterId, 
+            GameInstance.GameService.SetCharacterPosition(info.Position,_currentInfo, 
                 result =>
-            {
-                GameInstance.PlayerCtrl.playerInfo.SetCharacterPosition(result.player.characterPosition);
+            { 
+               GameInstance.PlayerCtrl.UpdatePlayerCharacter(result.player);
             }); 
             
-            OnAddTeamTab?.Invoke(currentInfo);
+            OnAddTeamTab?.Invoke(_currentInfo);
         }
     }
 }

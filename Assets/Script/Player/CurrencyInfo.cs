@@ -13,8 +13,7 @@ namespace Script.Player
         {
             gold = 100;
             gem = 0;
-        }
-
+        } 
         public CurrencyInfo SetGold(float gold)
         {
             this.gold = gold;

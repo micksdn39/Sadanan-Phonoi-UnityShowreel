@@ -6195,13 +6195,7 @@ MonoBehaviour:
     - Name: characterInfo
       Entry: 6
       Data: 
-    - Name: characterPosition
-      Entry: 6
-      Data: 
-    - Name: positionOfCharacter
-      Entry: 6
-      Data: 
-    - Name: OnPlayerCharacterChanged
+    - Name: OnCharacterChanged
       Entry: 6
       Data: 
     - Name: OnPlayerProfileChanged

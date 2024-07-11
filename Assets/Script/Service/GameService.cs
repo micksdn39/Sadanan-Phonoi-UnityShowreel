@@ -1,11 +1,11 @@
-using System;
-using Script.Character;
+using System; 
 using Script.Database.Shop;
 using Script.Enum;
 using Script.Player;
 using Script.Save;
 using Script.Service.Character;
 using UnityEngine;
+using CharacterInfo = Script.Character.CharacterInfo;
 
 namespace Script.Service
 {
@@ -78,10 +78,13 @@ namespace Script.Service
             onFinish(new PlayerInfoResult{ player = playerData.Clone() });
         }
 
-        public void UpdatePlayerCharacterPosition(int position,int id,
+        public void SetCharacterPosition(int position,CharacterInfo info,
             Action<PlayerInfoResult> onFinish)
         {
-            playerData.GetCharacterPosition(position).SetCharacterId(id);
+            var character = playerData.GetCharacterByPosition(position);
+            if(character != null)
+                character.SetCharacterPosition(0);
+            playerData.SetCharacterPositionByGuid(info,position);
             
             onFinish(new PlayerInfoResult { player = playerData.Clone() });
             SavePlayerData();
