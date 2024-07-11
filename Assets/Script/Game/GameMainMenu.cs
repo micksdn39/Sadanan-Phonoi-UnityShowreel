@@ -20,7 +20,7 @@ namespace Script.Game
         {
             if (!GameInstance.IsInitialized)
             {
-                SceneManager.LoadScene("LoginScene");
+                SceneManager.LoadScene(loadSceneName);
                 return;
             }
             SubscribePlayerProfile();
@@ -52,8 +52,8 @@ namespace Script.Game
         private void OnPlayerCharacterChange(CharacterSO character,int position,
             Action<int, GameObject> callback)
         { 
-            var gameObject = character.InstantiatePrefab(dictionaryOfCharacterPosition[position]); 
-            callback?.Invoke(position,gameObject);
+            var prefab = character.InstantiatePrefab(dictionaryOfCharacterPosition[position]); 
+            callback?.Invoke(position,prefab);
         }
         
         public void OnButtonClick_Logout()

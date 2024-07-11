@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Script.DialogBox;
 using Script.Language;
 using Script.Save;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,21 +10,21 @@ using UnityEngine.SceneManagement;
 
 namespace Script.Game
 {
-    public class GameLogin : MonoBehaviour
+    public class GameLogin : SerializedMonoBehaviour
     { 
-        [SerializeField] private GameObject panelLogin;
-        [SerializeField] private GameObject panelLoginOrRegister;
+        [SerializeField] private Dictionary<ELoginRoot,GameObject> menuRoot;   
         [Space]
         [SerializeField] private string loadSceneName; 
-        [SerializeField] private GameObject tabToStartGameObject;  
+        [Space]
         [SerializeField] private GameRegister gameRegister;
+        [SerializeField] private GameObject tabToStartGameObject;  
         [SerializeField] private TextMeshProUGUI accountNameText;
         [SerializeField] private TMP_InputField inputName;
         
-        private bool isOpenRegister = false;
-        private string name;
+        private bool _isOpenRegister = false;
+        private string _name;
 
-        private enum ELoginPanel
+        private enum ELoginRoot
         {
             NONE,
             LOGIN,
@@ -36,13 +36,13 @@ namespace Script.Game
 
             void OnInputNameChanged(string name)
             {
-                this.name = name;
+                this._name = name;
             } 
-            ActivePanel(ELoginPanel.NONE);
+            ActivePanel(ELoginRoot.NONE);
         } 
         private void Update()
         {
-            if (isOpenRegister) return;
+            if (_isOpenRegister) return;
             OnCheckGetInputMouse(); 
         }
         private void OnCheckGetInputMouse()
@@ -54,13 +54,12 @@ namespace Script.Game
                 string currentPlayerId = ClientSave.Load(SaveKey.CurrentAccount);
                 if (string.IsNullOrEmpty(currentPlayerId))
                 {
-                    ActivePanel(ELoginPanel.LOGIN_OR_REGISTER);
+                    ActivePanel(ELoginRoot.LOGIN_OR_REGISTER);
                     return;
                 }  
                 AccountLogin(); 
             }
         }
-
         private void AccountLogin()
         {
             GameInstance.GameService.LoginAnonymous(result =>
@@ -71,7 +70,7 @@ namespace Script.Game
                         callback =>
                     {
                         GameInstance.PlayerCtrl.SetPlayerInfo(result.player);
-                        ActivePanel(ELoginPanel.LOGIN);
+                        ActivePanel(ELoginRoot.LOGIN);
 
                         accountNameText.text = GameInstance.LanguageManager.GetText(GameText.TITLE_WELLCOME) + 
                                                GameInstance.PlayerCtrl.playerInfo.playerName;
@@ -80,27 +79,23 @@ namespace Script.Game
                 });
             }); 
         }
-        private void LoadNewScene()
-        {
-            SceneManager.LoadScene(loadSceneName); 
-        }  
+
+        #region ButtonClick 
         public void OnButtonClick_LoginName()
         {
-            GameInstance.GameService.LoginAnonymous(name, result =>
+            GameInstance.GameService.LoginAnonymous(_name, result =>
             {
                 result.BasicMessageErrorService(success:()=>
                 { 
                     AccountLogin();
-                    ActivePanel(ELoginPanel.LOGIN);
+                    ActivePanel(ELoginRoot.LOGIN);
                 });
                
             });
         }
         public void OnButtonClick_SignUp()
         {
-            gameRegister.Open();
-            gameRegister.OnRegisterSuccess+=AccountLogin;
-            isOpenRegister = true;
+            gameRegister.Init(AccountLogin); 
             ActiveTabToStart(false);
         }
         public void OnButtonClick_Login()
@@ -110,42 +105,34 @@ namespace Script.Game
         public void OnButtonClick_Logout()
         {
            GameInstance.GameService.LogoutAnonymous();
-           Dialog.BasicMessageOK(GameInstance.LanguageManager.GetText(GameText.TITLE_LOGOUT),
-               result =>
+           Dialog.BasicMessageOK(GameInstance.LanguageManager.GetText(
+                   GameText.TITLE_LOGOUT), result =>
                {
-                   ActivePanel(ELoginPanel.LOGIN_OR_REGISTER);
+                   ActivePanel(ELoginRoot.LOGIN_OR_REGISTER);
                });
         }
         public void OnButtonClick_Exit()
-        {
-            isOpenRegister = false;
+        { 
             ActiveTabToStart(true);
         }
+        #endregion
 
-        private void ActivePanel(ELoginPanel panel)
-        {
-            switch (panel)
-            {
-                case ELoginPanel.NONE:
-                    panelLogin.SetActive(false);
-                    panelLoginOrRegister.SetActive(false);
-                    break;
-                case ELoginPanel.LOGIN:
-                    panelLogin.SetActive(true);
-                    panelLoginOrRegister.SetActive(false);
-                    break;
-                case ELoginPanel.LOGIN_OR_REGISTER:
-                    panelLogin.SetActive(false);
-                    panelLoginOrRegister.SetActive(true);
-                    break;
-            }
+        private void ActivePanel(ELoginRoot root)
+        { 
+            foreach (var r in menuRoot) 
+                r.Value.SetActive(r.Key == root); 
         }
         private void ActiveTabToStart(bool active)
         {
             tabToStartGameObject.SetActive(active); 
+            _isOpenRegister = !active;
         }
          
-        #region Helper
+        #region Helper 
+        private void LoadNewScene()
+        {
+            SceneManager.LoadScene(loadSceneName); 
+        }
         private PointerEventData _pointerEventData;
         private List<RaycastResult> _results;
 

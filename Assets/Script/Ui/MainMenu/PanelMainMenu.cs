@@ -55,25 +55,8 @@ namespace Script.Ui.MainMenu
         
         private void SetActiveRoot(EMainMenuRoot root)
         {
-            switch (root)
-            {
-                case EMainMenuRoot.MAIN_MENU:
-                    foreach (var r in mainMenuRoot) 
-                        r.Value.SetActive(false);                
-                    break;
-                case EMainMenuRoot.CURRENCY_SHOP:
-                    foreach (var r in mainMenuRoot) 
-                        r.Value.SetActive(r.Key == EMainMenuRoot.CURRENCY_SHOP); 
-                    break;
-                case EMainMenuRoot.CHARACTER_SHOP:
-                    foreach (var r in mainMenuRoot) 
-                        r.Value.SetActive(r.Key == EMainMenuRoot.CHARACTER_SHOP); 
-                    break;
-                case EMainMenuRoot.CHARACTER_INVENTORY:
-                    foreach (var r in mainMenuRoot) 
-                        r.Value.SetActive(r.Key == EMainMenuRoot.CHARACTER_INVENTORY); 
-                    break;
-            }
+            foreach (var r in mainMenuRoot) 
+                r.Value.SetActive(r.Key == root);  
         }
     }
 }

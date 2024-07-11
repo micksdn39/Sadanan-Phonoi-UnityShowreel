@@ -6,9 +6,7 @@ using UnityEngine;
 namespace Script.Ui.Profile
 {
     public class ProfileImageCtrl : BaseCtrl<ProfileImageTab,ProfileDataSO>
-    { 
-        [SerializeField] private GameObject root;
-
+    {  
         private void Start()
         {
             RefreshUi();

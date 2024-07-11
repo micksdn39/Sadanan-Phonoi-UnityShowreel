@@ -13,18 +13,20 @@ namespace Script.Game
         public static GameInstance Singleton { get; private set; }
         
         public GameDatabase gameDatabase; 
-        public static GameDatabase GameDatabase { get; private set; }
+        public static GameDatabase GameDatabase { get; private set; } 
+        
+        public LanguageManager languageManager;
+        public static LanguageManager LanguageManager { get; private set; }
         
         public GameService gameService;
         public static GameService GameService { get; private set; }
         
-        public LanguageManager languageManager;
-        public static LanguageManager LanguageManager { get; private set; }
 
         public PlayerCtrl playerCtrl;
         public static PlayerCtrl PlayerCtrl { get; private set; }
-        public Helpers helpers;
-        public static Helpers Helpers { get; private set; }
+        
+        
+        public Helpers helpers; 
         public static event Action OnInitializedCompleted;
         private void Awake()
         {
@@ -41,9 +43,10 @@ namespace Script.Game
             GameDatabase = gameDatabase;
             GameService = gameService;
             LanguageManager = languageManager;
-            PlayerCtrl = playerCtrl;
-            Helpers = helpers;
+            PlayerCtrl = playerCtrl; 
+            
             OnInitializedCompleted?.Invoke();
+            OnInitializedCompleted = null;
         }
 
     }

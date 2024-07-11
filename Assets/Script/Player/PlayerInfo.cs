@@ -60,7 +60,7 @@ namespace Script.Player
         { 
             foreach (var ch in positionOfCharacter)
             {
-                GameInstance.Helpers.DoDestroy(ch.Value);
+                GameInstance.Singleton.helpers.DoDestroy(ch.Value);
             }
             positionOfCharacter.Clear();
             
@@ -80,7 +80,7 @@ namespace Script.Player
         { 
             foreach (var ch in positionOfCharacter)
             {
-                GameInstance.Helpers.DoDestroy(ch.Value);
+                GameInstance.Singleton.helpers.DoDestroy(ch.Value);
             }
             positionOfCharacter.Clear();
             

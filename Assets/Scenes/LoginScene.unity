@@ -3852,7 +3852,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a36d5eb0060d0149aedc972d4427c78, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3916,7 +3916,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &699453190
@@ -4953,7 +4953,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8a36d5eb0060d0149aedc972d4427c78, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5017,7 +5017,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1067168506
@@ -5884,11 +5884,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a791d8dd23731f4ea98cdc1c194b0c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelLogin: {fileID: 978860895}
-  panelLoginOrRegister: {fileID: 938829499}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 978860895}
+    - {fileID: 938829499}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: menuRoot
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[Script.Game.GameLogin+ELoginRoot,
+        Assembly-CSharp],[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Script.Game.GameLogin+ELoginRoot,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   loadSceneName: MainMenuScene
-  tabToStartGameObject: {fileID: 668937806}
   gameRegister: {fileID: 1066221943}
+  tabToStartGameObject: {fileID: 668937806}
   accountNameText: {fileID: 17690604}
   inputName: {fileID: 494196327}
 --- !u!4 &1268242765
@@ -6072,8 +6131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameDatabase: {fileID: 11400000, guid: 2871cf949eeab7842857c8de6b46c529, type: 2}
-  gameService: {fileID: 1305292967}
   languageManager: {fileID: 11400000, guid: 82263d39e809f4a43beb32e7cbc2ce73, type: 2}
+  gameService: {fileID: 1305292967}
   playerCtrl: {fileID: 1305292968}
   helpers: {fileID: 1305292969}
 --- !u!4 &1305292966
@@ -6410,7 +6469,6 @@ MonoBehaviour:
   tabPrefab: {fileID: 1467713011}
   listOfTabs: []
   listOfInfo: []
-  root: {fileID: 249292272}
 --- !u!1 &1424286495
 GameObject:
   m_ObjectHideFlags: 0

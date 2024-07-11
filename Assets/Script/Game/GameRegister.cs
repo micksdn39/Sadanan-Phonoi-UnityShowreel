@@ -12,15 +12,14 @@ using UnityEngine;
 namespace Script.Game
 {
     public class GameRegister : SerializedMonoBehaviour
-    {
-        [Title("Panel Root")] 
+    { 
         [SerializeField] private Dictionary<ERegisterRoot,GameObject> registerRoot;  
         [Space]
         [SerializeField] private TMP_InputField inputFieldName;
         [SerializeField] private ProfileImageCtrl profileImageCtrl;
         
-        private string name;
-        private int profileId;  
+        private string _name;
+        private int _profileId;  
         public event Action OnRegisterSuccess;
 
         enum ERegisterRoot
@@ -35,25 +34,30 @@ namespace Script.Game
         {
             ClientSave.DeleteAll();
         }
-        public void Open()
+        public void Init(Action callback)
         {
+            OnRegisterSuccess = null;
+            OnRegisterSuccess += callback;
+            
             SetActiveRoot(ERegisterRoot.REGISTER);
             inputFieldName.onValueChanged.AddListener(input => 
-                name = input);
+                _name = input);
             profileImageCtrl.OnRegisterProfileSelected += OnRegisterProfileSelected;
             
             void OnRegisterProfileSelected(int profileId)
             {
-                this.profileId = profileId;
+                this._profileId = profileId;
             } 
-        }   
+        }
+
+        #region Button Click 
         public void OnButtonClick_GuestLogin()
         { 
             SetActiveRoot(ERegisterRoot.ENTER_NAME);
         }
         public void OnButtonClick_ConfirmEnterName()
         {
-            string nameConfirm = GameInstance.LanguageManager.GetText(GameText.TITLE_NAME_CONFIRM) + name;
+            string nameConfirm = GameInstance.LanguageManager.GetText(GameText.TITLE_NAME_CONFIRM) + _name;
             
             Dialog.BasicMessageYesNo(nameConfirm,Callback);
             
@@ -69,8 +73,8 @@ namespace Script.Game
         {
             GameInstance.GameService.RegisterAnonymous(
                 new PlayerInfo()
-                    .SetPlayerName(name)
-                    .SetProfileId(profileId),
+                    .SetPlayerName(_name)
+                    .SetProfileId(_profileId),
                 result =>
                 {  
                     result.BasicMessageErrorService(success:() =>
@@ -91,27 +95,12 @@ namespace Script.Game
                         error: () => SetActiveRoot(ERegisterRoot.ENTER_NAME));
                 }); 
         }
+        #endregion
+        
         private void SetActiveRoot(ERegisterRoot root)
-        {
-            switch (root)
-            {
-                case ERegisterRoot.NONE:
-                    foreach (var r in registerRoot) 
-                        r.Value.SetActive(false); 
-                    break;
-                case ERegisterRoot.REGISTER:
-                    foreach (var r in registerRoot) 
-                        r.Value.SetActive(r.Key == ERegisterRoot.REGISTER); 
-                    break;
-                case ERegisterRoot.ENTER_NAME:
-                    foreach (var r in registerRoot) 
-                        r.Value.SetActive(r.Key == ERegisterRoot.ENTER_NAME); 
-                    break;
-                case ERegisterRoot.PROFILE:
-                    foreach (var r in registerRoot) 
-                        r.Value.SetActive(r.Key == ERegisterRoot.PROFILE); 
-                    break; 
-            }
+        { 
+            foreach (var r in registerRoot) 
+                r.Value.SetActive(r.Key == root);  
         }
     }
 }
