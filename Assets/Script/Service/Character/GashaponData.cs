@@ -6,8 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Script.Service.Character
-{
-    [System.Serializable]
+{ 
     public class GashaponData
     {
         public List<Gashapon> gashaponList = new List<Gashapon>();
@@ -95,48 +94,9 @@ namespace Script.Service.Character
             if(randomValue < tierRate[GameEnum.ETier.EPIC] +tierRate[GameEnum.ETier.LEGEND])
                 return GameEnum.ETier.EPIC;
             if(randomValue < tierRate[GameEnum.ETier.RARE] +tierRate[GameEnum.ETier.EPIC]
-                                                            +tierRate[GameEnum.ETier.LEGEND])
+                                                           +tierRate[GameEnum.ETier.LEGEND])
                 return GameEnum.ETier.RARE;
             return GameEnum.ETier.COMMON;
         }
-    }
-
-    public class Gashapon : BaseInfo
-    {
-        public string gashaName;
-        public int gashaId;
-        public List<CharacterGashapon> gashaponCharacter;
-        public CurrencyOptions gashaPrice;
-        public Dictionary<GameEnum.ETier, int> gashaponTierRate = new Dictionary<GameEnum.ETier, int>();
-        public Gashapon(int gashaId,GameEnum.ECurrency currencyType = GameEnum.ECurrency.GOLD)
-        {
-            this.gashaId = gashaId;
-            gashaponCharacter = new List<CharacterGashapon>();
-            gashaPrice = new CurrencyOptions()
-            {
-                currencyType = currencyType,
-                amount = 100
-            };
-        }
-        public Gashapon AddCharacter(int characterId,GameEnum.ETier tier)
-        {
-            gashaponCharacter.Add(
-                new CharacterGashapon
-                {
-                    characterId = characterId,
-                    tier = tier
-                });
-            return this;
-        }
-
-        public List<CharacterGashapon> GetCharacterByTier(GameEnum.ETier tier)
-        {
-            return gashaponCharacter.FindAll(x => x.tier == tier);
-        }
-    }
-    public class CharacterGashapon
-    {
-        public int characterId;
-        public GameEnum.ETier tier ;
     }
 }

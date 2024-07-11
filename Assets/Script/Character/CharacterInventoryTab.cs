@@ -1,4 +1,6 @@
 using Script.Game;
+using Script.Language;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +10,7 @@ namespace Script.Character
     {
         [SerializeField] public Image characterIcon;
         [SerializeField] public Image selectedIcon;
-
+        [SerializeField] public TextMeshProUGUI levelText;
         void MarkAsSelected(bool selected)
         {
             selectedIcon.gameObject.SetActive(selected);
@@ -38,6 +40,7 @@ namespace Script.Character
         {
             var characterSprite = GameInstance.GameDatabase.GetCharacter(info.characterId).characterIcon;
             characterIcon.sprite = characterSprite;
+            levelText.text = GameInstance.LanguageManager.GetText(GameText.TITLE_LEVEL) + info.level.ToString();
             selectedIcon.gameObject.SetActive(false);
 
             CheckPosition();
