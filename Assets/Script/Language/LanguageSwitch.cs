@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Script.Game;
 using Sirenix.OdinInspector;
@@ -9,32 +10,46 @@ namespace Script.Language
 {
     public class LanguageSwitch : SerializedMonoBehaviour
     {
-        [OdinSerialize] Dictionary<string, Sprite> languageSprites = new Dictionary<string, Sprite>();
+        [OdinSerialize] private Dictionary<string, Sprite> languageSprites = new Dictionary<string, Sprite>();
         
-        private Image image;
+        private Image _image;
+
+        private void Awake()
+        {
+            _image = this.GetComponent<Image>();
+        }
+
         private void Start()
         {
-            if(!GameInstance.IsInitialized) return;
-            image = this.GetComponent<Image>();
+            if(!GameInstance.IsInitialized)
+            {
+                GameInstance.OnInitializedCompleted += Start;
+                return;
+            } 
             SetImage();
         }
 
         private void SetImage()
         {
-            if (languageSprites.ContainsKey(GameInstance.LanguageManager.CurrentLanguageKey))
+            if (languageSprites.ContainsKey(GetLanguageKey()))
             {
-                image.sprite = languageSprites[GameInstance.LanguageManager.CurrentLanguageKey];
+                _image.sprite = languageSprites[GetLanguageKey()];
             }
         }
         public void ChangeLanguage()
+        { 
+            GameInstance.LanguageManager.ChangeLanguage(GetLanguageKey()); 
+            SetImage();
+        }
+
+        private string GetLanguageKey()
         {
             string key = "";
             if (GameInstance.LanguageManager.CurrentLanguageKey == "ENG")
                 key = "TH";
             else if (GameInstance.LanguageManager.CurrentLanguageKey == "TH")
                 key = "ENG";
-            GameInstance.LanguageManager.ChangeLanguage(key); 
-            SetImage();
+            return key;
         }
     }
 }

@@ -14,37 +14,32 @@ namespace Script.Language
         [HideIf("isGetFontOnly")]
         [SerializeField] private string key; 
 
-        private TextMeshProUGUI text;
+        private TextMeshProUGUI _text;
+
+        private void Awake()
+        {
+            _text = GetComponent<TextMeshProUGUI>();
+        }
+
         private void Start()
         {
             if(!GameInstance.IsInitialized)
             {
-                GameInstance.OnInitializedCompleted += DoStart;
+                GameInstance.OnInitializedCompleted += Start;
                 return;
             } 
-            DoStart(); 
-        } 
-        void DoStart()
-        { 
-            text = GetComponent<TextMeshProUGUI>();
-            text.font = GameInstance.LanguageManager.GetFont();
-            
-            if(isGetFontOnly) return;
-            
-            text.text = GameInstance.LanguageManager.GetText(key);
-            GameInstance.LanguageManager.OnLanguageChanged += SubscribeOnLanguageChanged; 
-        }
+            SetText();
+            GameInstance.LanguageManager.OnLanguageChanged += SetText; 
+        }  
         private void OnDestroy()
-        {
-            if(!GameInstance.IsInitialized)
-            {  
-                GameInstance.OnInitializedCompleted -= DoStart; 
-            } 
+        { 
+            GameInstance.LanguageManager.OnLanguageChanged -= SetText; 
         } 
-        private void SubscribeOnLanguageChanged()
+        private void SetText()
         {
-            text.font = GameInstance.LanguageManager.GetFont();
-            text.text = GameInstance.LanguageManager.GetText(key);
+            _text.font = GameInstance.LanguageManager.GetFont();
+            if(isGetFontOnly) return;
+            _text.text = GameInstance.LanguageManager.GetText(key);
         }
     }
 }
